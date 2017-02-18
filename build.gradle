@@ -1,0 +1,46 @@
+buildscript {
+    ext.kotlin_version = '1.0.6'
+    ext.kotlin_version = '1.0.5-3'
+    ext.anko_version = '0.9'
+    ext.support_version = '25.1.1'
+    ext.dagger_version = '2.7'
+    ext.android_plugin_version = '2.2.0-alpha4'
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.google.gms:google-services:3.0.0'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath "com.android.tools.build:gradle:$android_plugin_version"
+        classpath "io.realm:realm-gradle-plugin:2.3.0"
+    }
+}
+
+allprojects {
+    /**
+     *  REQUIRES FOR IGNORE JAVADOCS FOR KT FILES
+     */
+    tasks.withType(Javadoc) {
+        excludes = ['**/*.kt']
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+    }
+
+    repositories {
+        maven { url "https://jitpack.io" }
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
