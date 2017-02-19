@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/mnu_homepage_section_label">
+        <menu>
+            <item
+                android:id="@+id/rate"
+                android:icon="@drawable/ic_star"
+                android:title="@string/mnu_homepage_rate" />
+            <item
+                android:id="@+id/report_bug"
+                android:icon="@drawable/ic_bug"
+                android:title="@string/mnu_homepage_report_bug" />
+            <item
+                android:id="@+id/about"
+                android:icon="@drawable/ic_about"
+                android:title="@string/mnu_homepage_about" />
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_exit"
+                android:title="@string/mnu_homepage_logout" />
+        </menu>
+    </item>
+</menu>

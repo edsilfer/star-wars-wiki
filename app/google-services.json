@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "946967366796",
+    "firebase_url": "https://start-wars-wiki.firebaseio.com",
+    "project_id": "start-wars-wiki",
+    "storage_bucket": "start-wars-wiki.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946967366796:android:0752eb8785b36edb",
+        "android_client_info": {
+          "package_name": "br.com.edsilfer.android.starwarswiki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946967366796-0cnrp6sk1tbnjr7vnm4nn09turf4bvr1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl8BAYfKX0RdZjwBmvCAn-lIYRS_Z41dA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- COMMONS =============================================================================== -->
+    <dimen name="app_bar_height">350dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="appbar_padding_top">8dp</dimen>
+
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+
+
+    <!-- TEXT -->
+    <dimen name="dim_text_h1_size">24sp</dimen>
+    <dimen name="dim_text_h2_size">18sp</dimen>
+    <dimen name="dim_text_h3_size">14sp</dimen>
+    <dimen name="dim_text_h4_size">10sp</dimen>
+
+    <!-- MAIN -->
+    <dimen name="dim_act_main_user_panel_height">235dip</dimen>
+    <dimen name="dim_act_main_user_thumbnail">100dip</dimen>
+    <dimen name="dim_act_main_user_bottom_panel_height">70dip</dimen>
+    <dimen name="dim_act_main_user_bottom_panel_icon_size">30dip</dimen>
+    <dimen name="dim_act_main_user_bottom_panel_icon_wrapper">70dip</dimen>
+    <dimen name="dim_act_main_game_width">100dip</dimen>
+    <dimen name="dim_act_main_user_thumbnail_list_item_size">50dip</dimen>
+
+</resources>
+
+
