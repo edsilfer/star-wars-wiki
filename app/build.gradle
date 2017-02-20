@@ -8,7 +8,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "br.com.edsilfer.android.starwarswiki"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -31,7 +31,7 @@ android {
         }
     }
 }
-
+// *************************************************************************************************
 dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.json:json:20140107'
@@ -69,8 +69,13 @@ dependencies {
     compile 'com.android.support:support-v4:25.1.1'
     compile 'com.android.support:support-vector-drawable:25.1.1'
     compile 'com.google.guava:guava:18.0'
-    compile 'com.google.android.gms:play-services:9.6.1'
+    compile 'com.google.android.gms:play-services:10.2.0'
     compile 'com.google.firebase:firebase-messaging:9.6.1'
+
+    // THRID PARTY
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'br.com.edsilfer:kotlin-support:1.0.33'
+    compile 'me.dm7.barcodescanner:zxing:1.9'
 
     // RETROFIT
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
