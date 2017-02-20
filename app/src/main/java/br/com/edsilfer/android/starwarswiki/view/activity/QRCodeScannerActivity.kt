@@ -1,10 +1,10 @@
-package br.com.edsilfer.android.starwarswiki.view
+package br.com.edsilfer.android.starwarswiki.view.activity
 
 import android.os.Bundle
 import br.com.edsilfer.android.starwarswiki.infrastructure.dagger.Injector
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.QRCodeScannerPresenterContract
-import br.com.edsilfer.android.starwarswiki.view.contracts.QRCodeScannerViewContract
+import br.com.edsilfer.android.starwarswiki.view.activity.contracts.QRCodeScannerViewContract
 import com.google.zxing.Result
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import javax.inject.Inject

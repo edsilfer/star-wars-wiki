@@ -1,4 +1,4 @@
-package br.com.edsilfer.android.starwarswiki.view
+package br.com.edsilfer.android.starwarswiki.view.activity
 
 import android.os.Bundle
 import br.com.edsilfer.android.starwarswiki.R
