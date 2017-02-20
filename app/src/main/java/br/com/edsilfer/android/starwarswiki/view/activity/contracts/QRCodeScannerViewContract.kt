@@ -1,4 +1,4 @@
-package br.com.edsilfer.android.starwarswiki.view.contracts
+package br.com.edsilfer.android.starwarswiki.view.activity.contracts
 
 import br.com.tyllt.view.contracts.BaseView
 

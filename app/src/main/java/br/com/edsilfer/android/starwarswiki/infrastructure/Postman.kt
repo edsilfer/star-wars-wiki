@@ -16,7 +16,19 @@ class Postman {
         getStarWarsAPIEndPoint().readPerson(url).enqueue(CallbackManager.CMCharacter())
     }
 
+    fun readMovie (url : String) {
+
+    }
+
     private fun getStarWarsAPIEndPoint(): SWAPIEndPoint {
+        return Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create(Gson()))
+                .baseUrl("http://swapi.co/api/")
+                .build()
+                .create(SWAPIEndPoint::class.java)
+    }
+
+    private fun getTheMoviesDBEndPoint(): SWAPIEndPoint {
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(Gson()))
                 .baseUrl("http://swapi.co/api/")

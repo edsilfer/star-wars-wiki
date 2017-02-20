@@ -9,11 +9,12 @@ import br.com.edsilfer.android.starwarswiki.model.ResponseWrapper
 import br.com.edsilfer.android.starwarswiki.model.enum.EventCatalog
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.HomepagePresenterContract
-import br.com.edsilfer.android.starwarswiki.view.contracts.HomepageViewContract
+import br.com.edsilfer.android.starwarswiki.view.activity.contracts.HomepageViewContract
 import br.com.edsilfer.kotlin_support.model.Events
 import br.com.edsilfer.kotlin_support.model.ISubscriber
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.registerForEvent
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.unregisterForEvent
+import br.com.tyllt.infrastructure.database.CharacterDAO
 import br.com.tyllt.view.contracts.BaseView
 
 
@@ -59,8 +60,13 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
     override fun onEventTriggered(event: Events, payload: Any?) {
         if (payload != null) {
             val wrapper = payload as ResponseWrapper
-            if (wrapper.success) {
-                Log.i(TAG, "Received payload response: ${wrapper.character}")
+            if (wrapper.success && wrapper.character != null) {
+                val character = wrapper.character
+                Log.i(TAG, "Received payload response: ${character}")
+                mView.addCharacter(wrapper.character)
+                CharacterDAO.create(character)
+            } else {
+                Log.e(TAG, "Request was not successfull or character is null")
             }
         }
     }

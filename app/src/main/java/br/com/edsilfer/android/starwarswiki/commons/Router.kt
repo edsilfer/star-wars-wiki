@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
-import br.com.edsilfer.android.starwarswiki.view.HomepageActivity
-import br.com.edsilfer.android.starwarswiki.view.QRCodeScannerActivity
+import br.com.edsilfer.android.starwarswiki.view.activity.HomepageActivity
+import br.com.edsilfer.android.starwarswiki.view.activity.QRCodeScannerActivity
 
 /**
  * Created by ferna on 2/18/2017.

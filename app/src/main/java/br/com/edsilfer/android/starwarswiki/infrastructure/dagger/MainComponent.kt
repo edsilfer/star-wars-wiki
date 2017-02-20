@@ -1,8 +1,8 @@
 package br.com.edsilfer.android.starwarswiki.infrastructure.dagger
 
-import br.com.edsilfer.android.starwarswiki.view.HomepageActivity
-import br.com.edsilfer.android.starwarswiki.view.QRCodeScannerActivity
-import br.com.edsilfer.android.starwarswiki.view.SplashActivity
+import br.com.edsilfer.android.starwarswiki.view.activity.HomepageActivity
+import br.com.edsilfer.android.starwarswiki.view.activity.QRCodeScannerActivity
+import br.com.edsilfer.android.starwarswiki.view.activity.SplashActivity
 import dagger.Component
 import javax.inject.Singleton
 
