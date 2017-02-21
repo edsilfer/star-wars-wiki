@@ -28,8 +28,16 @@ class CharacterAdapter(
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = mData[position]
         if (character.isValid) {
-            Picasso.with(mView.getContext()).load("http://cdn.idigitaltimes.com/sites/idigitaltimes.com/files/2015/11/23/luke-skywalker-force-awakens.jpg").fit().centerCrop().into(holder.image)
+            if (!character.image_url.isNullOrBlank()) {
+                Picasso.with(mView.getContext()).load(character.image_url).fit().centerCrop().into(holder.image)
+            } else {
+                Picasso.with(mView.getContext()).load(R.drawable.ic_image_not_found).fit().centerCrop().into(holder.image)
+            }
+
             holder.name.text = character.name
+            holder.gender.text = character.gender
+            holder.height.text = character.height.toString()
+            holder.mass.text = character.mass.toString()
         }
     }
 
@@ -39,3 +47,4 @@ class CharacterAdapter(
     }
 
 }
+

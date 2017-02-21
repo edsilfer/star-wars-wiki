@@ -1,15 +1,21 @@
 package br.com.edsilfer.android.starwarswiki.presenter
 
+import android.Manifest
+import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchQRCodeScanner
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
+import br.com.edsilfer.android.starwarswiki.model.Character
 import br.com.edsilfer.android.starwarswiki.model.ResponseWrapper
 import br.com.edsilfer.android.starwarswiki.model.enum.EventCatalog
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.HomepagePresenterContract
 import br.com.edsilfer.android.starwarswiki.view.activity.contracts.HomepageViewContract
+import br.com.edsilfer.android.starwarswiki.view.dialogs.FancyLoadingDialog
+import br.com.edsilfer.kotlin_support.extensions.checkPermission
+import br.com.edsilfer.kotlin_support.extensions.random
 import br.com.edsilfer.kotlin_support.model.Events
 import br.com.edsilfer.kotlin_support.model.ISubscriber
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.registerForEvent
@@ -24,49 +30,87 @@ import br.com.tyllt.view.contracts.BaseView
 
 class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, BasePresenter(), ISubscriber {
 
+    companion object {
+        val REQUEST_PERMISSION_CAMERA = 98
+    }
 
     private val TAG = HomepagePresenter::class.simpleName
 
     override fun hasEvents() = true
     private lateinit var mContext: AppCompatActivity
     private lateinit var mView: HomepageViewContract
+    private var mCharacter: Character? = null
 
     override fun takeView(_view: BaseView) {
         mView = _view as HomepageViewContract
         mContext = _view.getContext()
         registerForEvent(EventCatalog.e001, this)
+        registerForEvent(EventCatalog.e002, this)
     }
 
     override fun dropView() {
         super.dropView()
         unregisterForEvent(EventCatalog.e001, this)
+        unregisterForEvent(EventCatalog.e002, this)
     }
 
     /*
     PRESENTER BUSINESS IMPLEMENTATION
      */
     override fun onAddCharacterClick(view: View) {
-        launchQRCodeScanner(mContext)
+        if (mContext.checkPermission(Manifest.permission.CAMERA)) {
+            launchQRCodeScanner(mContext)
+        } else {
+            mContext.runOnUiThread {
+                ActivityCompat.requestPermissions(mContext, arrayOf(Manifest.permission.CAMERA), REQUEST_PERMISSION_CAMERA)
+            }
+        }
     }
 
     override fun onQRCodeRead(url: String) {
         Log.i(TAG, "Read QR Code content is $url.")
+        mView.showLoading()
         mPostman.readUrl(url)
+    }
+
+    override fun onCameraPermissionGranted() {
+        launchQRCodeScanner(mContext)
     }
 
     /*
     NETWORK HANDLING
      */
     override fun onEventTriggered(event: Events, payload: Any?) {
-        if (payload != null) {
-            val wrapper = payload as ResponseWrapper
-            if (wrapper.success && wrapper.character != null) {
-                val character = wrapper.character
-                Log.i(TAG, "Received payload response: ${character}")
-                mView.addCharacter(wrapper.character)
-                CharacterDAO.create(character)
-            } else {
-                Log.e(TAG, "Request was not successfull or character is null")
+        val wrapper = payload as ResponseWrapper
+        if (wrapper.success) {
+            when (event) {
+                EventCatalog.e001 -> handleCharacterRead(wrapper)
+                EventCatalog.e002 -> handleImageRead(wrapper)
+            }
+        } else {
+            mView.hideLoading()
+        }
+    }
+
+    private fun handleImageRead(wrapper: ResponseWrapper) {
+        mView.hideLoading()
+        if (wrapper.payload != null && mCharacter != null) {
+            mCharacter!!.image_url = sortImageUrl(wrapper.payload as MutableList<String>)
+            Log.i(TAG, "Received payload response: ${mCharacter}")
+            mView.addCharacter(mCharacter!!)
+            CharacterDAO.create(mCharacter!!)
+        }
+    }
+
+    private fun sortImageUrl(list: MutableList<String>): String {
+        return list[Int.random(list.size)]
+    }
+
+    private fun handleCharacterRead(wrapper: ResponseWrapper) {
+        if (wrapper.payload != null) {
+            mCharacter = wrapper.payload as Character
+            if (mCharacter != null) {
+                mPostman.searchImage(mCharacter!!.name)
             }
         }
     }

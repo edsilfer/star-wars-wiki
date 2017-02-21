@@ -26,6 +26,7 @@ open class Character : RealmObject() {
     open var created: Date = Date()
     open var edited: Date = Date()
     open var url: String = ""
+    open var image_url: String = ""
 
     @Ignore
     open val films = mutableListOf<String>()

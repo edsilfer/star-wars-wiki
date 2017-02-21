@@ -1,11 +1,18 @@
 <resources>
-
-    <string name="app_name">Star Wars Wiki</string>
-
     <!-- *************************************************************************************** -->
     <!-- COMMONS -->
     <!-- *************************************************************************************** -->
+    <string name="app_name">Star Wars Wiki</string>
+    <string name="str_commons_utils_empty_collection">You have no %s yet…</string>
+    <string name="str_commons_util_loading">Loading…</string>
+
+    <string name="str_commons_characters_requests">CHARACTERS</string>
+
+    <!-- *************************************************************************************** -->
+    <!-- ERRORS -->
+    <!-- *************************************************************************************** -->
     <string name="str_error_001">We are sorry but QR Code is not operational!</string>
+
 
     <!-- *************************************************************************************** -->
     <!-- MENU -->
