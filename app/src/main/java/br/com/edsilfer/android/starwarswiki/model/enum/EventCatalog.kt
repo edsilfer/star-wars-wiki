@@ -9,5 +9,9 @@ enum class EventCatalog : Events {
     /*
      URL READ
      */
-    e001
+    e001,
+    /*
+    IMAGES LOADED
+     */
+    e002
 }

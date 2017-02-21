@@ -27,5 +27,35 @@
             android:textColor="#FFFFFF"
             android:textSize="@dimen/textH1"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:shadowColor="#000000"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/textH2"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:shadowColor="#000000"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/textH2"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:shadowColor="#000000"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/textH2"
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

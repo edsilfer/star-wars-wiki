@@ -3,6 +3,7 @@ package br.com.edsilfer.android.starwarswiki.view.activity
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutCompat
 import android.support.v7.widget.LinearLayoutManager
@@ -12,11 +13,13 @@ import br.com.edsilfer.android.starwarswiki.databinding.ActivityHomepageBinding
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
 import br.com.edsilfer.android.starwarswiki.infrastructure.dagger.Injector
 import br.com.edsilfer.android.starwarswiki.model.Character
+import br.com.edsilfer.android.starwarswiki.presenter.HomepagePresenter.Companion.REQUEST_PERMISSION_CAMERA
 import br.com.edsilfer.android.starwarswiki.presenter.QRCodeScannerPresenter.Companion.ARG_RESULT_URL
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.HomepagePresenterContract
 import br.com.edsilfer.android.starwarswiki.view.activity.contracts.HomepageViewContract
 import br.com.edsilfer.android.starwarswiki.view.adapter.CharacterAdapter
+import br.com.edsilfer.android.starwarswiki.view.dialogs.FancyLoadingDialog
 import br.com.edsilfer.kotlin_support.extensions.paintStatusBar
 import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
 import br.com.tyllt.infrastructure.database.CharacterDAO
@@ -38,6 +41,9 @@ class HomepageActivity : BaseActivity(), HomepageViewContract {
 
     override fun getContext() = this
     override fun getPresenter() = mPresenter as BasePresenter
+    private var mDialog: FancyLoadingDialog? = null
+    private var mIsStateAlreadySaved = false
+    private var mPendingShowDialog = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,11 +55,31 @@ class HomepageActivity : BaseActivity(), HomepageViewContract {
         loadCachedCharacter()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if (resultCode == RESULT_OK) {
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        mIsStateAlreadySaved = false
+        if (mPendingShowDialog) {
+            mPendingShowDialog = false
+            showLoading()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mIsStateAlreadySaved = true;
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == RESULT_OK && data != null) {
             when (requestCode) {
                 REQUEST_QRCODE_READER -> mPresenter.onQRCodeRead(data.getStringExtra(ARG_RESULT_URL))
             }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when (requestCode) {
+            REQUEST_PERMISSION_CAMERA -> mPresenter.onCameraPermissionGranted()
         }
     }
 
@@ -79,6 +105,23 @@ class HomepageActivity : BaseActivity(), HomepageViewContract {
             characters.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             characters.adapter = CharacterAdapter(this, CharacterDAO.list().toMutableList())
         }
+    }
+
+    override fun showLoading() {
+        runOnUiThread {
+            if (mIsStateAlreadySaved) {
+                mPendingShowDialog = true
+            } else {
+                mDialog = FancyLoadingDialog()
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                transaction.add(android.R.id.content, mDialog).addToBackStack(null).commit()
+            }
+        }
+    }
+
+    override fun hideLoading() {
+        mDialog?.dismiss()
     }
 
 }
