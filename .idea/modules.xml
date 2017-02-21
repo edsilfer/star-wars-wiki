@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/android-start-wars-wiki.iml" filepath="$PROJECT_DIR$/android-start-wars-wiki.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/search-images/search-images.iml" filepath="$PROJECT_DIR$/search-images/search-images.iml" />
+      <module fileurl="file://$PROJECT_DIR$/star-wars-wiki.iml" filepath="$PROJECT_DIR$/star-wars-wiki.iml" />
     </modules>
   </component>
 </project>

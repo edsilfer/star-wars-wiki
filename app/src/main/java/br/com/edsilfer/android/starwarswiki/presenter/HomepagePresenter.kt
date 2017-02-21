@@ -5,6 +5,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchGitHubLink
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchQRCodeScanner
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
@@ -16,6 +17,7 @@ import br.com.edsilfer.android.starwarswiki.presenter.contracts.HomepagePresente
 import br.com.edsilfer.android.starwarswiki.view.activity.contracts.HomepageViewContract
 import br.com.edsilfer.kotlin_support.extensions.checkPermission
 import br.com.edsilfer.kotlin_support.extensions.random
+import br.com.edsilfer.kotlin_support.extensions.showPopUp
 import br.com.edsilfer.kotlin_support.model.Events
 import br.com.edsilfer.kotlin_support.model.ISubscriber
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.registerForEvent
@@ -81,6 +83,10 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
         launchGitHubLink(mContext)
     }
 
+    override fun onCharacterClick(character: Character) {
+        mContext.showPopUp("Alert", "${character.name} has been clicked")
+    }
+
     /*
     NETWORK HANDLING
      */
@@ -114,8 +120,23 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
         if (wrapper.payload != null) {
             mCharacter = wrapper.payload as Character
             if (mCharacter != null) {
-                mPostman.searchImage(mCharacter!!.name)
+                if (!doesCharacterHasAlreadyBeenScanned(mCharacter!!)) {
+                    mPostman.searchImage(mCharacter!!.name)
+                } else {
+                    mView.showErrorMessage(R.string.str_error_already_already_exists)
+                }
             }
         }
     }
+
+    private fun doesCharacterHasAlreadyBeenScanned(character: Character): Boolean {
+        val chars = CharacterDAO.list()
+        for (c in chars) {
+            if (c.url == character.url) {
+                return true
+            }
+        }
+        return false
+    }
+
 }

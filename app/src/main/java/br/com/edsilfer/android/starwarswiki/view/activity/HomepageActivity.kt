@@ -8,9 +8,11 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.MenuItem
 import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.commons.Router.REQUEST_QRCODE_READER
+import br.com.edsilfer.android.starwarswiki.commons.Router.launchGitHubLink
 import br.com.edsilfer.android.starwarswiki.databinding.ActivityHomepageBinding
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
 import br.com.edsilfer.android.starwarswiki.infrastructure.dagger.Injector
@@ -22,12 +24,12 @@ import br.com.edsilfer.android.starwarswiki.presenter.contracts.HomepagePresente
 import br.com.edsilfer.android.starwarswiki.view.activity.contracts.HomepageViewContract
 import br.com.edsilfer.android.starwarswiki.view.adapter.CharacterAdapter
 import br.com.edsilfer.android.starwarswiki.view.dialogs.FancyLoadingDialog
-import br.com.edsilfer.kotlin_support.extensions.paintStatusBar
-import br.com.edsilfer.kotlin_support.extensions.putProperty
 import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
+import br.com.edsilfer.kotlin_support.extensions.showUnderConstructionPopUp
 import br.com.tyllt.infrastructure.database.CharacterDAO
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.LibsBuilder
 import kotlinx.android.synthetic.main.activity_homepage.*
-import kotlinx.android.synthetic.main.rsc_homepage_drawer_menu_content.*
 import kotlinx.android.synthetic.main.rsc_homepage_main_content.*
 import javax.inject.Inject
 
@@ -37,6 +39,8 @@ import javax.inject.Inject
  */
 
 class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.OnNavigationItemSelectedListener {
+
+    private val TAG = HomepageActivity::class.simpleName
 
     @Inject
     lateinit var mPostman: Postman
@@ -52,15 +56,12 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        paintStatusBar(android.R.color.transparent, true)
         setContentView(R.layout.activity_homepage)
         Injector.getInstance().inject(this)
         initDataBinding()
         initToolbar()
         loadCachedCharacter()
-
     }
-
 
     override fun onResumeFragments() {
         super.onResumeFragments()
@@ -117,17 +118,28 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
 
         val navigationView = findViewById(R.id.nav_view) as NavigationView
         navigationView.setNavigationItemSelectedListener(this)
+
+        val headerLayout = navigationView.getHeaderView(0)
+        val forkMe = headerLayout.findViewById(R.id.fork_me)
+        forkMe.setOnClickListener {
+            launchGitHubLink(this)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
         if (id == R.id.rate) {
-
+            launchGitHubLink(this)
         } else if (id == R.id.report_bug) {
-
+            showUnderConstructionPopUp()
         } else if (id == R.id.about) {
-
+            LibsBuilder()
+                    .withActivityTitle(getString(R.string.app_name))
+                    .withAboutIconShown(true)
+                    .withAboutVersionShown(true)
+                    .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                    .start(this)
         } else if (id == R.id.exit) {
             finish()
         }
@@ -143,6 +155,7 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
 
     override fun addCharacter(character: Character) {
         runOnUiThread {
+            characters.visibility = RecyclerView.VISIBLE
             val adapter = characters.adapter as CharacterAdapter
             adapter.addItem(character)
         }
@@ -172,6 +185,10 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
 
     override fun hideLoading() {
         mDialog?.dismiss()
+    }
+
+    override fun onCharacterClick(character: Character) {
+
     }
 
 }

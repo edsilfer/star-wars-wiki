@@ -14,5 +14,6 @@ interface HomepageViewContract : BaseView {
 
     fun addCharacter(character : Character)
 
+    fun onCharacterClick (character: Character)
 
 }

@@ -15,4 +15,6 @@ interface HomepagePresenterContract {
 
     fun onForkMeClick()
 
+    fun onCharacterClick (character : br.com.edsilfer.android.starwarswiki.model.Character)
+
 }
