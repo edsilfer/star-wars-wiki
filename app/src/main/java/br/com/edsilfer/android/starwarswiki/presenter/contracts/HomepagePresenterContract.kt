@@ -11,4 +11,8 @@ interface HomepagePresenterContract {
 
     fun onQRCodeRead (url : String)
 
+    fun onCameraPermissionGranted ()
+
+    fun onForkMeClick()
+
 }

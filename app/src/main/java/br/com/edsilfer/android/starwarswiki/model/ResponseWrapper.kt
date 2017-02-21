@@ -6,5 +6,5 @@ package br.com.edsilfer.android.starwarswiki.model
 
 data class ResponseWrapper(
         val success: Boolean,
-        val character: Character?
+        val payload: Any?
 )

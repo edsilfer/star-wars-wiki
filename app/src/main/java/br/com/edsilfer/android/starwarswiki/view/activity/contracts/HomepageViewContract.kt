@@ -14,4 +14,5 @@ interface HomepageViewContract : BaseView {
 
     fun addCharacter(character : Character)
 
+
 }

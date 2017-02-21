@@ -76,6 +76,8 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'br.com.edsilfer:kotlin-support:1.0.33'
     compile 'me.dm7.barcodescanner:zxing:1.9'
+    compile project(':search-images')
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.5'
 
     // RETROFIT
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

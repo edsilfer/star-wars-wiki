@@ -16,9 +16,9 @@
                 android:icon="@drawable/ic_about"
                 android:title="@string/mnu_homepage_about" />
             <item
-                android:id="@+id/logout"
+                android:id="@+id/exit"
                 android:icon="@drawable/ic_exit"
-                android:title="@string/mnu_homepage_logout" />
+                android:title="@string/mnu_homepage_exit" />
         </menu>
     </item>
 </menu>
