@@ -38,6 +38,11 @@ class CharacterAdapter(
             holder.gender.text = character.gender
             holder.height.text = character.height.toString()
             holder.mass.text = character.mass.toString()
+            holder.yob.text = character.birth_year
+
+            holder.wrapper.setOnClickListener {
+                mView.onCharacterClick(character)
+            }
         }
     }
 

@@ -1,73 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/wrapper"
     android:layout_width="match_parent"
-    android:layout_height="180dip"
-    android:background="?attr/selectableItemBackground">
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:padding="8dip">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <android.support.v7.widget.CardView
+        android:id="@+id/image_wrapper"
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:layout_centerVertical="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:padding="5dip">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/rsc_gradient_black"
-        android:orientation="vertical"
-        android:paddingBottom="5dip"
-        android:paddingTop="5dip">
+        android:layout_toEndOf="@+id/image_wrapper"
+        android:layout_toRightOf="@+id/image_wrapper"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginStart="10dip"
-            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Luke Skywalker"
+            android:textColor="#000000"
             android:textSize="@dimen/textH1"
             android:textStyle="bold" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/gender"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginStart="10dip"
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/textH2"
-                android:textStyle="bold" />
+                android:layout_marginTop="2dip"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/height"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dip"
-                android:layout_marginRight="10dip"
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/textH3"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/yob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_birth_date"
+                    android:drawableStart="@drawable/ic_birth_date"
+                    android:fontFamily="sans-serif-light"
+                    android:text="1235"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/textH2"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/mass"
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_gender"
+                    android:drawableStart="@drawable/ic_gender"
+                    android:fontFamily="sans-serif-light"
+                    android:text="male"
+                    android:layout_marginTop="3dip"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/textH2"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dip"
-                android:layout_marginRight="10dip"
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/textH3"
-                android:textStyle="bold" />
+                android:layout_marginLeft="50dip"
+                android:layout_marginStart="50dip"
+                android:layout_marginTop="2dip"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_height"
+                    android:drawableStart="@drawable/ic_height"
+                    android:fontFamily="sans-serif-light"
+                    android:text="176"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/textH3"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
+                    android:drawableLeft="@drawable/ic_weight"
+                    android:drawableStart="@drawable/ic_weight"
+                    android:fontFamily="sans-serif-light"
+                    android:text="75"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/textH3"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

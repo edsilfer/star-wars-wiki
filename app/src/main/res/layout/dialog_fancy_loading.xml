@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:htext="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -16,23 +17,22 @@
             android:layout_height="130dp"
             android:src="@drawable/ic_loading" />
 
-        <TextView
+        <com.hanks.htextview.HTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
+            android:gravity="center_horizontal"
             android:shadowColor="#628dbb"
             android:shadowRadius="5"
+            android:text="loading..."
             android:textColor="#3C71AA"
             android:textSize="20sp"
-            android:gravity="center_horizontal"
-            android:text="loading..." />
+            htext:animateType="anvil"
+            htext:fontAsset="fonts/font-name.ttf" />
 
-        <ProgressBar
-            android:id="@+id/progressBarLoadingRecite"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="5dp"
-            android:layout_marginTop="10dip"
-            android:indeterminate="true" />
+        <br.com.edsilfer.kotlin_support.presenter.layout.LineProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip" />
     </LinearLayout>
 </RelativeLayout>

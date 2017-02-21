@@ -78,6 +78,10 @@ dependencies {
     compile 'me.dm7.barcodescanner:zxing:1.9'
     compile project(':search-images')
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.5'
+    compile 'hanks.xyz:htextview-library:0.1.5'
+    compile('com.mikepenz:aboutlibraries:5.6.5@aar') {
+        transitive = true
+    }
 
     // RETROFIT
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
