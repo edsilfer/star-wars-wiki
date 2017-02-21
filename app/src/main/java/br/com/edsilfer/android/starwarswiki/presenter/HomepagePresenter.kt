@@ -5,6 +5,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import br.com.edsilfer.android.starwarswiki.commons.Router.launchGitHubLink
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchQRCodeScanner
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
 import br.com.edsilfer.android.starwarswiki.model.Character
@@ -13,7 +14,6 @@ import br.com.edsilfer.android.starwarswiki.model.enum.EventCatalog
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.HomepagePresenterContract
 import br.com.edsilfer.android.starwarswiki.view.activity.contracts.HomepageViewContract
-import br.com.edsilfer.android.starwarswiki.view.dialogs.FancyLoadingDialog
 import br.com.edsilfer.kotlin_support.extensions.checkPermission
 import br.com.edsilfer.kotlin_support.extensions.random
 import br.com.edsilfer.kotlin_support.model.Events
@@ -75,6 +75,10 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
 
     override fun onCameraPermissionGranted() {
         launchQRCodeScanner(mContext)
+    }
+
+    override fun onForkMeClick() {
+        launchGitHubLink(mContext)
     }
 
     /*

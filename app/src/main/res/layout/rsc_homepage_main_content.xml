@@ -15,54 +15,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
-
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
-                app:layout_collapseMode="pin" />
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/characters"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/app_bar" />
+            android:background="#ffffff"
+            android:orientation="vertical">
 
-        <br.com.edsilfer.android.starwarswiki.view.layout.LoadingCollectionFeedback
-            android:id="@+id/collection_loading_feedback"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            app:collectionName="@string/str_commons_characters_requests"
-            app:image="@drawable/ic_collections_characters" />
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_game"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="16dip"
-            android:clickable="true"
-            android:onClick="@{presenter::onAddCharacterClick}"
-            app:backgroundTint="@android:color/white"
-            app:borderWidth="0dp"
-            app:elevation="2dp"
-            app:fabSize="normal"
-            app:srcCompat="@drawable/ic_plus" />
-    </RelativeLayout>
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/characters"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/app_bar" />
+
+            <br.com.edsilfer.android.starwarswiki.view.layout.LoadingCollectionFeedback
+                android:id="@+id/collection_loading_feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:collectionName="@string/str_commons_characters_requests"
+                app:image="@drawable/ic_no_friends" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="16dip"
+                android:clickable="true"
+                android:onClick="@{presenter::onAddCharacterClick}"
+                app:backgroundTint="@color/colorAccent"
+                app:borderWidth="0dp"
+                app:elevation="2dp"
+                app:fabSize="normal"
+                app:srcCompat="@drawable/ic_plus" />
+        </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>
