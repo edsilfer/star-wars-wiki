@@ -3,8 +3,12 @@ package br.com.edsilfer.android.starwarswiki.view.activity
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.NavigationView
 import android.support.v4.app.FragmentTransaction
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.commons.Router.REQUEST_QRCODE_READER
 import br.com.edsilfer.android.starwarswiki.databinding.ActivityHomepageBinding
@@ -19,8 +23,11 @@ import br.com.edsilfer.android.starwarswiki.view.activity.contracts.HomepageView
 import br.com.edsilfer.android.starwarswiki.view.adapter.CharacterAdapter
 import br.com.edsilfer.android.starwarswiki.view.dialogs.FancyLoadingDialog
 import br.com.edsilfer.kotlin_support.extensions.paintStatusBar
+import br.com.edsilfer.kotlin_support.extensions.putProperty
 import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
 import br.com.tyllt.infrastructure.database.CharacterDAO
+import kotlinx.android.synthetic.main.activity_homepage.*
+import kotlinx.android.synthetic.main.rsc_homepage_drawer_menu_content.*
 import kotlinx.android.synthetic.main.rsc_homepage_main_content.*
 import javax.inject.Inject
 
@@ -29,7 +36,7 @@ import javax.inject.Inject
  * Created by ferna on 2/18/2017.
  */
 
-class HomepageActivity : BaseActivity(), HomepageViewContract {
+class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.OnNavigationItemSelectedListener {
 
     @Inject
     lateinit var mPostman: Postman
@@ -49,8 +56,11 @@ class HomepageActivity : BaseActivity(), HomepageViewContract {
         setContentView(R.layout.activity_homepage)
         Injector.getInstance().inject(this)
         initDataBinding()
+        initToolbar()
         loadCachedCharacter()
+
     }
+
 
     override fun onResumeFragments() {
         super.onResumeFragments()
@@ -88,9 +98,42 @@ class HomepageActivity : BaseActivity(), HomepageViewContract {
     private fun initToolbar() {
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
-        supportActionBar!!.setHomeButtonEnabled(true);
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true);
-        supportActionBar!!.setDisplayShowTitleEnabled(true);
+        supportActionBar!!.setHomeButtonEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(true)
+        initDrawerMenu()
+    }
+
+    private fun initDrawerMenu() {
+        val toggle = ActionBarDrawerToggle(
+                this,
+                drawer_layout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        )
+        drawer_layout.setDrawerListener(toggle)
+        toggle.syncState()
+
+        val navigationView = findViewById(R.id.nav_view) as NavigationView
+        navigationView.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+
+        if (id == R.id.rate) {
+
+        } else if (id == R.id.report_bug) {
+
+        } else if (id == R.id.about) {
+
+        } else if (id == R.id.exit) {
+            finish()
+        }
+
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
     }
 
     /*

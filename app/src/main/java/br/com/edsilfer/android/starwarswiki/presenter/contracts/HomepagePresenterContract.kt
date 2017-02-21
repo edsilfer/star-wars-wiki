@@ -13,4 +13,6 @@ interface HomepagePresenterContract {
 
     fun onCameraPermissionGranted ()
 
+    fun onForkMeClick()
+
 }
