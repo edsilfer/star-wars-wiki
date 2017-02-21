@@ -3,4 +3,7 @@
     <color name="colorPrimary">#191A17</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FFE81F</color>
+
+    <!-- COLLECTIONS COLOR -->
+    <color name="clr_empty_collection">#44000000</color>
 </resources>

@@ -4,8 +4,6 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutCompat
 import android.support.v7.widget.LinearLayoutManager
 import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.commons.Router.REQUEST_QRCODE_READER
@@ -44,7 +42,6 @@ class HomepageActivity : BaseActivity(), HomepageViewContract {
     private var mDialog: FancyLoadingDialog? = null
     private var mIsStateAlreadySaved = false
     private var mPendingShowDialog = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +85,14 @@ class HomepageActivity : BaseActivity(), HomepageViewContract {
         binding.presenter = mPresenter
     }
 
+    private fun initToolbar() {
+        toolbar.title = getString(R.string.app_name)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setHomeButtonEnabled(true);
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true);
+        supportActionBar!!.setDisplayShowTitleEnabled(true);
+    }
+
     /*
     CONTRACT IMPLEMENTATION
      */
@@ -102,8 +107,10 @@ class HomepageActivity : BaseActivity(), HomepageViewContract {
 
     override fun loadCachedCharacter() {
         runOnUiThread {
+            val charactersObjects = CharacterDAO.list().toMutableList()
             characters.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-            characters.adapter = CharacterAdapter(this, CharacterDAO.list().toMutableList())
+            characters.adapter = CharacterAdapter(this, charactersObjects)
+            collection_loading_feedback.showFeedback(characters, charactersObjects)
         }
     }
 
