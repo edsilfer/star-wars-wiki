@@ -2,7 +2,7 @@ buildscript {
     ext.kotlin_version = '1.0.6'
     ext.kotlin_version = '1.0.5-3'
     ext.anko_version = '0.9'
-    ext.support_version = '25.1.1'
+    ext.support_version = '25.2.0'
     ext.dagger_version = '2.7'
     ext.android_plugin_version = '2.2.0-alpha4'
 

@@ -19,7 +19,7 @@
         tools:replace="android:name">
 
         <activity
-            android:name=".view.activity.SplashActivity"
+            android:name=".view.activities.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -31,9 +31,13 @@
         </activity>
 
         <activity
-            android:name=".view.activity.HomepageActivity"
+            android:name=".view.activities.HomepageActivity"
             android:windowSoftInputMode="stateHidden|adjustPan|adjustResize" />
 
-        <activity android:name=".view.activity.QRCodeScannerActivity" />
+        <activity android:name=".view.activities.QRCodeScannerActivity" />
+
+        <activity
+            android:name=".view.activities.FilmsActivity"
+            android:theme="@style/Theme.AppCompat.Translucent" />
     </application>
 </manifest>

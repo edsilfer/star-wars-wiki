@@ -5,6 +5,8 @@ import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import br.com.edsilfer.android.starwarswiki.R
+import br.com.edsilfer.android.starwarswiki.commons.Router
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchGitHubLink
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchQRCodeScanner
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
@@ -13,21 +15,20 @@ import br.com.edsilfer.android.starwarswiki.model.ResponseWrapper
 import br.com.edsilfer.android.starwarswiki.model.enum.EventCatalog
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.HomepagePresenterContract
-import br.com.edsilfer.android.starwarswiki.view.activity.contracts.HomepageViewContract
+import br.com.edsilfer.android.starwarswiki.view.activities.contracts.HomepageViewContract
 import br.com.edsilfer.kotlin_support.extensions.checkPermission
-import br.com.edsilfer.kotlin_support.extensions.random
 import br.com.edsilfer.kotlin_support.model.Events
 import br.com.edsilfer.kotlin_support.model.ISubscriber
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.registerForEvent
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.unregisterForEvent
 import br.com.tyllt.infrastructure.database.CharacterDAO
 import br.com.tyllt.view.contracts.BaseView
+import java.util.*
 
 
 /**
  * Created by ferna on 2/18/2017.
  */
-
 class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, BasePresenter(), ISubscriber {
 
     companion object {
@@ -57,7 +58,7 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
     /*
     PRESENTER BUSINESS IMPLEMENTATION
      */
-    override fun onAddCharacterClick(view: View) {
+    override fun searchByQrcode(view: View) {
         if (mContext.checkPermission(Manifest.permission.CAMERA)) {
             launchQRCodeScanner(mContext)
         } else {
@@ -65,6 +66,14 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
                 ActivityCompat.requestPermissions(mContext, arrayOf(Manifest.permission.CAMERA), REQUEST_PERMISSION_CAMERA)
             }
         }
+    }
+
+    override fun searchByUrl(view: View) {
+        mView.showGetUrlPopUp()
+    }
+
+    override fun onUrlType(url: String) {
+        onQRCodeRead(url)
     }
 
     override fun onQRCodeRead(url: String) {
@@ -79,6 +88,16 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
 
     override fun onForkMeClick() {
         launchGitHubLink(mContext)
+    }
+
+    override fun onCharacterClick(character: Character) {
+        val urls = character.films.mapTo(ArrayList<String>()) { it.string }
+        Router.launchFilmsActivity(mContext, urls)
+    }
+
+    override fun deleteCharacter(character: Character) {
+        CharacterDAO.delete(character.id)
+        mView.removeCharacter(character)
     }
 
     /*
@@ -107,15 +126,30 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
     }
 
     private fun sortImageUrl(list: MutableList<String>): String {
-        return list[Int.random(list.size)]
+        return list[Random().nextInt(list.size)]
     }
 
     private fun handleCharacterRead(wrapper: ResponseWrapper) {
         if (wrapper.payload != null) {
             mCharacter = wrapper.payload as Character
             if (mCharacter != null) {
-                mPostman.searchImage(mCharacter!!.name)
+                if (!doesCharacterHasAlreadyBeenScanned(mCharacter!!)) {
+                    mPostman.searchImage(mCharacter!!.name)
+                } else {
+                    mView.showErrorMessage(R.string.str_error_already_already_exists)
+                }
             }
         }
     }
+
+    private fun doesCharacterHasAlreadyBeenScanned(character: Character): Boolean {
+        val chars = CharacterDAO.list()
+        for (c in chars) {
+            if (c.url == character.url) {
+                return true
+            }
+        }
+        return false
+    }
+
 }

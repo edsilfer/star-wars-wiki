@@ -24,11 +24,15 @@
 
     <!-- HOMEPAGE -->
     <string name="mnu_homepage_section_label">Options</string>
-    <string name="mnu_homepage_rate">Rate us!</string>
+    <string name="mnu_homepage_rate">Star on GitHub!</string>
     <string name="mnu_homepage_report_bug">Report a bug</string>
     <string name="mnu_homepage_about">About</string>
     <string name="mnu_homepage_exit">Exit</string>
     <string name="str_author_name">Edgar S Fernandes</string>
     <string name="str_author_linkedin">http://linkedin.com/edsilfer</string>
+    <string name="str_error_already_already_exists">This character is already present on your library.</string>
+    <string name="str_commons_token_loading">loading...</string>
+    <string name="str_author_github_repository">https://github.com/edsilfer/star-wars-wiki</string>
+    <string name="str_characters_dialog_title">Character Options</string>
 
 </resources>
