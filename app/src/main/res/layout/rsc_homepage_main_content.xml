@@ -49,7 +49,44 @@
                 app:collectionName="@string/str_commons_characters_requests"
                 app:image="@drawable/ic_no_friends" />
 
-            <android.support.design.widget.FloatingActionButton
+            <com.github.clans.fab.FloatingActionMenu
+                android:id="@+id/fab_menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:menu_animationDelayPerItem="50"
+                app:menu_colorNormal="#3C71AA"
+                app:menu_colorPressed="#3C71AA"
+                app:menu_labels_singleLine="true">
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{presenter::searchByQrcode}"
+                    android:src="@drawable/ic_qrcode"
+                    app:fab_colorNormal="#3C71AA"
+                    app:fab_colorPressed="#3C71AA"
+                    app:fab_hideAnimation="@anim/fab_scale_down"
+                    app:fab_label="Search by qr code"
+                    app:fab_size="mini" />
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{presenter::searchByUrl}"
+                    android:src="@drawable/ic_url"
+                    app:fab_colorNormal="#3C71AA"
+                    app:fab_colorPressed="#3C71AA"
+                    app:fab_hideAnimation="@anim/fab_scale_down"
+                    app:fab_label="Search by url"
+                    app:fab_size="mini" />
+            </com.github.clans.fab.FloatingActionMenu>
+
+
+            <!--<android.support.design.widget.FloatingActionButton
                 android:id="@+id/add_game"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,12 +95,12 @@
                 android:layout_alignParentRight="true"
                 android:layout_margin="16dip"
                 android:clickable="true"
-                android:onClick="@{presenter::onAddCharacterClick}"
+                android:onClick="@{presenter::searchByQrcode}"
                 app:backgroundTint="@color/colorAccent"
                 app:borderWidth="0dp"
                 app:elevation="2dp"
                 app:fabSize="normal"
-                app:srcCompat="@drawable/ic_plus" />
+                app:srcCompat="@drawable/ic_plus" />-->
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

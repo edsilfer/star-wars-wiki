@@ -7,11 +7,20 @@ import br.com.edsilfer.kotlin_support.model.Events
  */
 enum class EventCatalog : Events {
     /*
-     URL READ
+     USER URL READ
      */
     e001,
     /*
-    IMAGES LOADED
+    USER IMAGE LOADED
      */
-    e002
+    e002,
+    /*
+    MOVIE URL READ
+     */
+    e003,
+    /*
+    MOVIE IMAGE LOADED
+     */
+    e004
+
 }

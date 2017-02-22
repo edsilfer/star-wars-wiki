@@ -1,4 +1,4 @@
-package br.com.edsilfer.android.starwarswiki.view.activity
+package br.com.edsilfer.android.starwarswiki.view.activities
 
 import android.os.Bundle
 import br.com.edsilfer.android.starwarswiki.R
@@ -24,7 +24,7 @@ class SplashActivity : BaseActivity(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        paintStatusBar(android.R.color.transparent, true)
+        paintStatusBar(android.R.color.black, true)
         setContentView(R.layout.activity_splash)
 
         doAsync {

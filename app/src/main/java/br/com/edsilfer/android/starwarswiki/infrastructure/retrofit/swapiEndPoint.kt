@@ -1,6 +1,7 @@
 package br.com.edsilfer.android.starwarswiki.infrastructure.retrofit
 
-import br.com.edsilfer.android.starwarswiki.model.Character
+import br.com.edsilfer.android.starwarswiki.model.dictionary.CharacterDictionary
+import br.com.edsilfer.android.starwarswiki.model.dictionary.MovieDictionary
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Url
@@ -11,6 +12,9 @@ import retrofit2.http.Url
 interface SWAPIEndPoint {
 
     @GET
-    fun readPerson(@Url url: String): Call<Character>
+    fun readPerson(@Url url: String): Call<CharacterDictionary>
+
+    @GET
+    fun readMovie(@Url url: String): Call<MovieDictionary>
 
 }
