@@ -1,4 +1,4 @@
-package br.com.edsilfer.android.starwarswiki.view.activity
+package br.com.edsilfer.android.starwarswiki.view.activities
 
 import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes

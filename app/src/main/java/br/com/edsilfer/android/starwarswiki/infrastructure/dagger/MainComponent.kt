@@ -1,8 +1,10 @@
 package br.com.edsilfer.android.starwarswiki.infrastructure.dagger
 
-import br.com.edsilfer.android.starwarswiki.view.activity.HomepageActivity
-import br.com.edsilfer.android.starwarswiki.view.activity.QRCodeScannerActivity
-import br.com.edsilfer.android.starwarswiki.view.activity.SplashActivity
+import br.com.edsilfer.android.starwarswiki.view.activities.FilmsActivity
+import br.com.edsilfer.android.starwarswiki.view.activities.HomepageActivity
+import br.com.edsilfer.android.starwarswiki.view.activities.QRCodeScannerActivity
+import br.com.edsilfer.android.starwarswiki.view.activities.SplashActivity
+import br.com.edsilfer.android.starwarswiki.view.fragments.FilmsFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -18,6 +20,11 @@ interface MainComponent {
     fun inject(homepageActivity: HomepageActivity)
 
     fun inject(qrCodeScannerActivity: QRCodeScannerActivity)
+
+    fun inject(filmsActivity: FilmsActivity)
+
+    fun inject(filmsFragment: FilmsFragment)
+
 
 }
 

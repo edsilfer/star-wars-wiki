@@ -1,15 +1,15 @@
 package br.com.edsilfer.android.starwarswiki.infrastructure
 
-import android.util.Log
-import br.com.edsilfer.android.starwarswiki.commons.util.Utils
 import br.com.edsilfer.android.starwarswiki.infrastructure.retrofit.CallbackManager
 import br.com.edsilfer.android.starwarswiki.infrastructure.retrofit.SWAPIEndPoint
+import br.com.edsilfer.android.starwarswiki.infrastructure.retrofit.TMDBEndPoint
 import br.com.edsilfer.android.starwarswiki.model.ResponseWrapper
 import br.com.edsilfer.android.starwarswiki.model.enum.EventCatalog
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.notify
 import com.google.gson.Gson
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 /**
  * Created by ferna on 2/18/2017.
@@ -24,15 +24,15 @@ class Postman {
     }
 
     fun readMovie(url: String) {
-
+        getStarWarsAPIEndPoint().readMovie(url).enqueue(CallbackManager.CMMovie())
     }
 
-    fun searchImage(
-            query: String
-    ) {
-        val postman = br.com.edsilfer.android.searchimages.communication.Postman()
+    fun searchMovie(title: String) {
+        getTheMoviesDBEndPoint().searchMovies("aa46f173e962dd2f43e9d2898fa98bcd", title).enqueue(CallbackManager.CMTMDBMovie())
+    }
 
-        postman.searchImage(
+    fun searchImage(query: String) {
+        br.com.edsilfer.android.searchimages.communication.Postman().searchImage(
                 query,
                 onRequestSuccess = { urls ->
                     val wrapper = ResponseWrapper(true, urls)
@@ -53,13 +53,11 @@ class Postman {
                 .create(SWAPIEndPoint::class.java)
     }
 
-    private fun getTheMoviesDBEndPoint(): SWAPIEndPoint {
+    private fun getTheMoviesDBEndPoint(): TMDBEndPoint {
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(Gson()))
-                .baseUrl("http://swapi.co/api/")
+                .baseUrl("http://api.themoviedb.org/3/")
                 .build()
-                .create(SWAPIEndPoint::class.java)
+                .create(TMDBEndPoint::class.java)
     }
-
-
 }

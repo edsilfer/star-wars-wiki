@@ -1,9 +1,12 @@
 package br.com.edsilfer.android.starwarswiki.model
 
 import br.com.edsilfer.android.starwarswiki.commons.util.SUID
+import br.com.edsilfer.android.starwarswiki.model.dictionary.CharacterDictionary
+import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.Ignore
 import io.realm.annotations.PrimaryKey
+import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
 
@@ -12,6 +15,32 @@ import java.util.*
  */
 
 open class Character : RealmObject() {
+
+    companion object {
+        fun parseDictionary(dictionary: CharacterDictionary): Character {
+            val result = Character()
+
+            result.id = dictionary.id
+            result.name = dictionary.name
+            result.height = dictionary.height
+            result.mass = dictionary.mass
+            result.hair_color = dictionary.hair_color
+            result.skin_color = dictionary.skin_color
+            result.eye_color = dictionary.eye_color
+            result.birth_year = dictionary.birth_year
+            result.gender = dictionary.gender
+            result.created = dictionary.created
+            result.edited = dictionary.edited
+            result.url = dictionary.url
+            result.image_url = dictionary.image_url
+
+            for (f in dictionary.films) {
+                result.films.add(RealmString(f))
+            }
+
+            return result
+        }
+    }
 
     @PrimaryKey
     open var id: Long = SUID.id()
@@ -27,9 +56,10 @@ open class Character : RealmObject() {
     open var edited: Date = Date()
     open var url: String = ""
     open var image_url: String = ""
-
-    @Ignore
-    open val films = mutableListOf<String>()
+    /*
+    Realm doesn't accept list of primitive types yet, so we need a workaround in order to make it work
+     */
+    open var films: RealmList<RealmString> = RealmList()
 
     override fun toString(): String {
         /*

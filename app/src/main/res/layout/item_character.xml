@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/wrapper"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:padding="8dip">
+    android:background="?attr/selectableItemBackground">
 
     <android.support.v7.widget.CardView
         android:id="@+id/image_wrapper"
         android:layout_width="80dip"
         android:layout_height="80dip"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:layout_margin="8dip"
+        android:elevation="4dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,8 +28,11 @@
     </android.support.v7.widget.CardView>
 
     <LinearLayout
+        android:id="@+id/info_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dip"
         android:layout_toEndOf="@+id/image_wrapper"
         android:layout_toRightOf="@+id/image_wrapper"
         android:orientation="vertical">
@@ -38,7 +41,7 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="sans-serif-thin"
             android:text="Luke Skywalker"
             android:textColor="#000000"
             android:textSize="@dimen/textH1"
@@ -48,6 +51,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dip"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -61,25 +65,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_birth_date"
+                    android:drawablePadding="3dp"
                     android:drawableStart="@drawable/ic_birth_date"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="sans-serif-thin"
                     android:text="1235"
                     android:textColor="#000000"
-                    android:textSize="@dimen/textH2"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/textH2" />
 
                 <TextView
                     android:id="@+id/gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
                     android:drawableLeft="@drawable/ic_gender"
+                    android:drawablePadding="3dp"
                     android:drawableStart="@drawable/ic_gender"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="sans-serif-thin"
                     android:text="male"
-                    android:layout_marginTop="3dip"
                     android:textColor="#000000"
-                    android:textSize="@dimen/textH2"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/textH2" />
             </LinearLayout>
 
 
@@ -96,26 +100,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_height"
+                    android:drawablePadding="3dp"
                     android:drawableStart="@drawable/ic_height"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="sans-serif-thin"
                     android:text="176"
                     android:textColor="#000000"
-                    android:textSize="@dimen/textH3"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/textH3" />
 
                 <TextView
                     android:id="@+id/mass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dip"
+                    android:layout_marginTop="10dip"
                     android:drawableLeft="@drawable/ic_weight"
+                    android:drawablePadding="3dp"
                     android:drawableStart="@drawable/ic_weight"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="sans-serif-thin"
                     android:text="75"
                     android:textColor="#000000"
-                    android:textSize="@dimen/textH3"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/textH3" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.25dp"
+        android:layout_below="@+id/info_wrapper"
+        android:layout_marginTop="20dip"
+        android:background="#aa000000" />
 </RelativeLayout>

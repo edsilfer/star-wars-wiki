@@ -4,8 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import br.com.edsilfer.android.starwarswiki.R
-import br.com.edsilfer.android.starwarswiki.view.activity.contracts.HomepageViewContract
+import br.com.edsilfer.android.starwarswiki.view.activities.contracts.HomepageViewContract
 import br.com.edsilfer.android.starwarswiki.view.viewholder.CharacterViewHolder
+import com.afollestad.materialdialogs.MaterialDialog
 import com.squareup.picasso.Picasso
 
 /**
@@ -43,12 +44,37 @@ class CharacterAdapter(
             holder.wrapper.setOnClickListener {
                 mView.onCharacterClick(character)
             }
+
+            holder.wrapper.setOnLongClickListener {
+                MaterialDialog
+                        .Builder(mView.getContext())
+                        .title(mView.getContext().getString(R.string.str_characters_dialog_title))
+                        .titleColor(mView.getContext().resources.getColor(R.color.colorPrimaryDark))
+                        .items(R.array.character_options)
+                        .itemsCallback {
+                            dialog,
+                            view,
+                            which,
+                            text ->
+                            when (which) {
+                                0 -> mView.deleteCharacter(character)
+                            }
+                        }
+                        .show()
+                true
+            }
         }
     }
 
     fun addItem(character: br.com.edsilfer.android.starwarswiki.model.Character) {
         mData.add(character)
         notifyItemInserted(itemCount)
+    }
+
+    fun removeItem(character: br.com.edsilfer.android.starwarswiki.model.Character) {
+        val index = mData.indexOf(character)
+        mData.remove(character)
+        notifyItemRemoved(index)
     }
 
 }

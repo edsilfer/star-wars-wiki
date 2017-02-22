@@ -1,4 +1,4 @@
-package br.com.edsilfer.android.starwarswiki.view.activity
+package br.com.edsilfer.android.starwarswiki.view.activities
 
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -21,10 +21,11 @@ import br.com.edsilfer.android.starwarswiki.presenter.HomepagePresenter.Companio
 import br.com.edsilfer.android.starwarswiki.presenter.QRCodeScannerPresenter.Companion.ARG_RESULT_URL
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.HomepagePresenterContract
-import br.com.edsilfer.android.starwarswiki.view.activity.contracts.HomepageViewContract
+import br.com.edsilfer.android.starwarswiki.view.activities.contracts.HomepageViewContract
 import br.com.edsilfer.android.starwarswiki.view.adapter.CharacterAdapter
 import br.com.edsilfer.android.starwarswiki.view.dialogs.FancyLoadingDialog
 import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
+import br.com.edsilfer.kotlin_support.extensions.showInputDialog
 import br.com.edsilfer.kotlin_support.extensions.showUnderConstructionPopUp
 import br.com.tyllt.infrastructure.database.CharacterDAO
 import com.mikepenz.aboutlibraries.Libs
@@ -96,6 +97,18 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
         binding.presenter = mPresenter
     }
 
+    override fun showGetUrlPopUp() {
+        showInputDialog(
+                title = "Search Character",
+                noInputs = 1,
+                hint1 = "http://swapi.co/api/people/?",
+                onAccept = {
+                    values ->
+                    mPresenter.onUrlType(values[0])
+                }
+        )
+    }
+
     private fun initToolbar() {
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
@@ -151,14 +164,24 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
     /*
     CONTRACT IMPLEMENTATION
      */
-    override fun showErrorMessage(message: Int) = showErrorPopUp(message)
+    override fun showErrorMessage(message: Int) {
+        hideLoading()
+        showErrorPopUp(message)
+    }
 
     override fun addCharacter(character: Character) {
         runOnUiThread {
-            characters.visibility = RecyclerView.VISIBLE
             val adapter = characters.adapter as CharacterAdapter
             adapter.addItem(character)
+            val charactersObjects = adapter.mData
+            characters.visibility = RecyclerView.VISIBLE
+            collection_loading_feedback.showFeedback(characters, charactersObjects)
         }
+    }
+
+    override fun removeCharacter(character: Character) {
+        val adapter = characters.adapter as CharacterAdapter
+        adapter.removeItem(character)
     }
 
     override fun loadCachedCharacter() {
@@ -188,7 +211,11 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
     }
 
     override fun onCharacterClick(character: Character) {
+        mPresenter.onCharacterClick(character)
+    }
 
+    override fun deleteCharacter(character: Character) {
+        mPresenter.deleteCharacter(character)
     }
 
 }

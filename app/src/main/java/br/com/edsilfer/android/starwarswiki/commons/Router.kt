@@ -3,11 +3,13 @@ package br.com.edsilfer.android.starwarswiki.commons
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import br.com.edsilfer.android.starwarswiki.view.activity.HomepageActivity
-import br.com.edsilfer.android.starwarswiki.view.activity.QRCodeScannerActivity
-import android.support.v4.content.ContextCompat.startActivity
+import br.com.edsilfer.android.starwarswiki.R
+import br.com.edsilfer.android.starwarswiki.infrastructure.App.Companion.getContext
+import br.com.edsilfer.android.starwarswiki.view.activities.FilmsActivity
+import br.com.edsilfer.android.starwarswiki.view.activities.HomepageActivity
+import br.com.edsilfer.android.starwarswiki.view.activities.QRCodeScannerActivity
+import java.util.*
 
 
 /**
@@ -16,8 +18,8 @@ import android.support.v4.content.ContextCompat.startActivity
 
 object Router {
 
-    val REQUEST_QRCODE_READER = 987
-    val ARG_GITHUB_REPOSITORY = "https://github.com/edsilfer/star-wars-wiki"
+    const val REQUEST_QRCODE_READER = 987
+    const val ARG_URLS = "ARG_URLS"
 
     fun launchHomepageActivity(context: Context) {
         val intent = Intent(context, HomepageActivity::class.java)
@@ -30,7 +32,13 @@ object Router {
     }
 
     fun launchGitHubLink(context: Context) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ARG_GITHUB_REPOSITORY))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getContext().getString(R.string.str_author_github_repository)))
+        context.startActivity(intent)
+    }
+
+    fun launchFilmsActivity(context: Context, urls: ArrayList<String>) {
+        val intent = Intent(context, FilmsActivity::class.java)
+        intent.putStringArrayListExtra(ARG_URLS, urls)
         context.startActivity(intent)
     }
 

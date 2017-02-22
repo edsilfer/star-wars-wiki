@@ -9,12 +9,12 @@
 
     <ImageView
         android:id="@+id/fork_me"
-        android:layout_width="200dp"
+        android:layout_width="160dp"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="-20dp"
-        android:layout_marginRight="-20dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
         android:src="@drawable/ic_fork_me" />
 
     <LinearLayout

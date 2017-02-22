@@ -7,7 +7,7 @@ import android.util.Log
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.QRCodeScannerPresenterContract
-import br.com.edsilfer.android.starwarswiki.view.activity.contracts.QRCodeScannerViewContract
+import br.com.edsilfer.android.starwarswiki.view.activities.contracts.QRCodeScannerViewContract
 import br.com.tyllt.view.contracts.BaseView
 
 

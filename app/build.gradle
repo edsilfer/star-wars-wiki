@@ -71,6 +71,7 @@ dependencies {
     compile 'com.google.guava:guava:18.0'
     compile 'com.google.android.gms:play-services:10.2.0'
     compile 'com.google.firebase:firebase-messaging:9.6.1'
+    compile 'com.github.clans:fab:1.6.4'
 
     // THRID PARTY
     compile 'org.greenrobot:eventbus:3.0.0'
