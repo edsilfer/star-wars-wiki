@@ -27,14 +27,14 @@ Create an application capable to read urls from Star Wars API, displaying these 
 <a name="requirements" />
 ## Requirements
 
-|   #  |Requirement                            |Description                                                                                                                                                                                                                           |		 
-|------|---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|		 
-|REQ001|Read QR Code                           | Application must be able to read an URL from a QR Code image, storing the collected data locally		 
-|REQ002|Display character list                 | Display to the user a list with all read characters containing, at least, character’s name and URL		
-|REQ003|Display user details                   | When click on a list item, application must display character’s details including a list of movies that that character was part of. Among the details, show: User’s geolocation at the time when that QR Code was read; Film’s poster;		
-|REQ004|Collect user’s geolocation             | Store user’s geolocation on local database at the moment that the QR Code is read		
-|REQ005|Allow user to navigate to film website | When user taps on movie’s poster, application must redirect the user to film’s website		
-|REQ006|Allow information caching              | All information once loaded from web into app must be persisted locally and accessible offline
+|   #  |Requirement                            |Description                                                                                                                                                                                                                           |	Done? |	 
+|------|---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|	-----	| 
+|REQ001|Read QR Code                           | Application must be able to read an URL from a QR Code image, storing the collected data locally		 |done
+|REQ002|Display character list                 | Display to the user a list with all read characters containing, at least, character’s name and URL		|done
+|REQ003|Display user details                   | When click on a list item, application must display character’s details including a list of movies that that character was part of. Among the details, show: User’s geolocation at the time when that QR Code was read; Film’s poster;		| done
+|REQ004|Collect user’s geolocation             | Store user’s geolocation on local database at the moment that the QR Code is read		|done
+|REQ005|Allow user to navigate to film website | When user taps on movie’s poster, application must redirect the user to film’s website		| done
+|REQ006|Allow information caching              | All information once loaded from web into app must be persisted locally and accessible offline | done
 
 <a name="showcase" />
 ## Showcase
