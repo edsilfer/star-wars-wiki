@@ -21,6 +21,7 @@ interface GCSAPIEndPoint {
     fun searchImage(
             @Query(QUERY_ARG_QUERY) query: String,
             @Query(encoded = true, value = QUERY_ARG_APPLICATION_ID) applicationKey: String,
+            @Query(QUERY_ARG_FILE_TYPE) fileType: String,
             @Query(QUERY_ARG_API_ID) key: String
     ): Observable<SearchResult>
 }
