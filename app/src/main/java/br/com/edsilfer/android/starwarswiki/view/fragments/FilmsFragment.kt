@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import br.com.edsilfer.android.starwarswiki.R
+import br.com.edsilfer.android.starwarswiki.commons.Router.launchMovieUrl
 import br.com.edsilfer.android.starwarswiki.infrastructure.dagger.Injector
 import br.com.edsilfer.android.starwarswiki.infrastructure.database.FilmDAO
 import br.com.edsilfer.android.starwarswiki.model.Film
@@ -51,6 +52,13 @@ class FilmsFragment : BaseFragment(), FilmsFragmentViewContract {
         mFilm = FilmDAO.read(arguments.getLong(ARG_FILM_ID))!!
         mImage = rootView.findViewById(R.id.image) as ImageView
         mName = rootView.findViewById(R.id.name) as TextView
+
+        mImage.setOnClickListener {
+            activity.runOnUiThread {
+                launchMovieUrl(activity as AppCompatActivity, mFilm.url)
+            }
+        }
+
         return rootView
     }
 
@@ -65,7 +73,7 @@ class FilmsFragment : BaseFragment(), FilmsFragmentViewContract {
     private fun loadFilm() {
         activity.runOnUiThread {
             mName.text = mFilm.title
-            Picasso.with(context).load(mFilm.url).fit().centerCrop().into(mImage)
+            Picasso.with(context).load(mFilm.image_url).fit().centerCrop().error(R.drawable.ic_image_not_found).into(mImage)
         }
     }
 }

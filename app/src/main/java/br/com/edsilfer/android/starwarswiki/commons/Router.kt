@@ -9,6 +9,7 @@ import br.com.edsilfer.android.starwarswiki.infrastructure.App.Companion.getCont
 import br.com.edsilfer.android.starwarswiki.view.activities.FilmsActivity
 import br.com.edsilfer.android.starwarswiki.view.activities.HomepageActivity
 import br.com.edsilfer.android.starwarswiki.view.activities.QRCodeScannerActivity
+import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
 import java.util.*
 
 
@@ -33,6 +34,11 @@ object Router {
 
     fun launchGitHubLink(context: Context) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getContext().getString(R.string.str_author_github_repository)))
+        context.startActivity(intent)
+    }
+
+    fun launchMovieUrl(context: AppCompatActivity, movieId: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.themoviedb.org/movie/$movieId"))
         context.startActivity(intent)
     }
 

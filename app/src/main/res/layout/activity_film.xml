@@ -21,9 +21,48 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
     </android.support.design.widget.AppBarLayout>
 
+    <LinearLayout
+        android:id="@+id/geolocation_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_wrapper"
+        android:orientation="horizontal"
+        android:padding="5dip">
+
+        <TextView
+            android:id="@+id/latitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_marginStart="5dip"
+            android:background="@android:color/transparent"
+            android:shadowColor="@color/colorTextShadow"
+            android:shadowRadius="2"
+            android:text="@string/str_commons_token_loading"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="@dimen/textH4"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/longitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_marginStart="5dip"
+            android:background="@android:color/transparent"
+            android:shadowColor="@color/colorTextShadow"
+            android:shadowRadius="2"
+            android:text="@string/str_commons_token_loading"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="@dimen/textH4"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/films"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar_wrapper" />
+        android:layout_below="@+id/geolocation_data" />
 </RelativeLayout>

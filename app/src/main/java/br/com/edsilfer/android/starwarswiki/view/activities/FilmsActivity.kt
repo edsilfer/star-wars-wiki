@@ -40,20 +40,25 @@ class FilmsActivity : BaseActivity(), FilmsActivityViewContract {
         initToolbar()
         retrieveUrls()
         initViewPager()
+
+        latitude.text = "lat: ${mCharacter.latitude}"
+        longitude.text = "lon: ${mCharacter.longitude}"
     }
 
     private fun retrieveUrls() {
         try {
             mCharacter = CharacterDAO.read(intent.extras.getLong(ARG_CHARACTER_ID))!!
-            Log.i(TAG, "Received character: $mCharacter")
         } catch (e: Exception) {
-            throw IllegalArgumentException("FilmsActivity requeries a list of urls in order to work")
+            throw IllegalArgumentException("FilmsActivity requests a Character object")
         }
     }
 
     private fun initToolbar() {
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(true)

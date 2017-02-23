@@ -64,6 +64,8 @@ open class Character : RealmObject() {
      */
     @SerializedName("films")
     open var films_urls: RealmList<RealmString> = RealmList()
+    open var latitude: String = ""
+    open var longitude: String = ""
 
 
     override fun toString(): String {
@@ -82,7 +84,7 @@ open class Character : RealmObject() {
         json.put("gender", gender)
         json.put("created", created)
         json.put("edited", edited)
-        json.put("url", url)
+        json.put("image_url", url)
         json.put("image_url", image_url)
         val _films = JSONArray()
         for (f in films) {

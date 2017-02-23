@@ -1,9 +1,7 @@
 package br.com.edsilfer.android.starwarswiki.infrastructure
 
-import android.util.Log
 import br.com.edsilfer.android.searchimages.communication.GCSAPIEndPoint
 import br.com.edsilfer.android.starwarswiki.commons.util.Utils
-import br.com.edsilfer.android.starwarswiki.infrastructure.retrofit.CallbackManager
 import br.com.edsilfer.android.starwarswiki.infrastructure.retrofit.SWAPIEndPoint
 import br.com.edsilfer.android.starwarswiki.infrastructure.retrofit.TMDBEndPoint
 import br.com.edsilfer.android.starwarswiki.model.Character
@@ -15,7 +13,6 @@ import br.com.edsilfer.android.starwarswiki.model.dictionary.SearchResult
 import br.com.edsilfer.android.starwarswiki.model.dictionary.TMDBWrapperResponseDictionary
 import br.com.edsilfer.android.starwarswiki.model.enum.EventCatalog
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.notify
-import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,7 +44,7 @@ class Postman {
                         result = Character.parseDictionary(character)
                         var count = 0
                         for (filmUrl in character.films) {
-                            searchMovieInfo(result!!, filmUrl, count++ == character.films.size -1)
+                            searchMovieInfo(result!!, filmUrl, count++ == character.films.size - 1)
                         }
                     }
 
@@ -60,7 +57,7 @@ class Postman {
     private fun searchCharacterImage(result: Character) {
         getGCSEndPoint()
                 .searchImage(
-                        result.name,
+                        "star wars ${result.name}",
                         Utils.readProperty(ARG_APPLICATION_KEY),
                         "jpeg",
                         Utils.readProperty(ARG_API_ID)
@@ -69,12 +66,8 @@ class Postman {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SimpleObserver<SearchResult>() {
                     override fun onSuccess(response: SearchResult) {
-                        OUTTER@ for (m in result.films_urls) {
-                            for ((pagemap) in response.items) {
-                                result.image_url = pagemap.metatags[Random().nextInt(pagemap.metatags.size)].imageUrl
-                                break@OUTTER
-                            }
-                        }
+                        val random = Random().nextInt(response.items.size)
+                        result.image_url = response.items[random].pagemap.metatags[0].imageUrl
                     }
 
                     override fun onError(e: Throwable?) {
@@ -114,8 +107,7 @@ class Postman {
                     override fun onSuccess(response: TMDBWrapperResponseDictionary) {
                         for (m in response.results) {
                             val posterUrl = "http://image.tmdb.org/t/p/original${m.backdrop_path}"
-                            val filmTitle = m.title
-                            result.films.add(Film(posterUrl, filmTitle))
+                            result.films.add(Film(m.id, posterUrl, m.title))
                             break
                         }
                     }
