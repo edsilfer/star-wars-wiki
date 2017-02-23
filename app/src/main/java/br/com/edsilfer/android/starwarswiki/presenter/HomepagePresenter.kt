@@ -21,7 +21,7 @@ import br.com.edsilfer.kotlin_support.model.Events
 import br.com.edsilfer.kotlin_support.model.ISubscriber
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.registerForEvent
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.unregisterForEvent
-import br.com.tyllt.infrastructure.database.CharacterDAO
+import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import br.com.tyllt.view.contracts.BaseView
 import java.util.*
 
@@ -79,7 +79,7 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
     override fun onQRCodeRead(url: String) {
         Log.i(TAG, "Read QR Code content is $url.")
         mView.showLoading()
-        mPostman.readUrl(url)
+        mPostman.searchCharacter(url)
     }
 
     override fun onCameraPermissionGranted() {
@@ -91,8 +91,7 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
     }
 
     override fun onCharacterClick(character: Character) {
-        val urls = character.films.mapTo(ArrayList<String>()) { it.string }
-        Router.launchFilmsActivity(mContext, urls)
+        Router.launchFilmsActivity(mContext, character.id)
     }
 
     override fun deleteCharacter(character: Character) {
@@ -108,36 +107,20 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
         if (wrapper.success) {
             when (event) {
                 EventCatalog.e001 -> handleCharacterRead(wrapper)
-                EventCatalog.e002 -> handleImageRead(wrapper)
             }
         } else {
             mView.hideLoading()
         }
     }
 
-    private fun handleImageRead(wrapper: ResponseWrapper) {
-        mView.hideLoading()
-        if (wrapper.payload != null && mCharacter != null) {
-            mCharacter!!.image_url = sortImageUrl(wrapper.payload as MutableList<String>)
-            Log.i(TAG, "Received payload response: ${mCharacter}")
-            mView.addCharacter(mCharacter!!)
-            CharacterDAO.create(mCharacter!!)
-        }
-    }
-
-    private fun sortImageUrl(list: MutableList<String>): String {
-        return list[Random().nextInt(list.size)]
-    }
-
     private fun handleCharacterRead(wrapper: ResponseWrapper) {
+        mView.hideLoading()
         if (wrapper.payload != null) {
-            mCharacter = wrapper.payload as Character
-            if (mCharacter != null) {
-                if (!doesCharacterHasAlreadyBeenScanned(mCharacter!!)) {
-                    mPostman.searchImage(mCharacter!!.name)
-                } else {
-                    mView.showErrorMessage(R.string.str_error_already_already_exists)
-                }
+            val character = wrapper.payload as Character
+            if (!doesCharacterHasAlreadyBeenScanned(character)) {
+                Log.i(TAG, "Received complete character: $mCharacter")
+                CharacterDAO.create(character)
+                mView.addCharacter(character)
             }
         }
     }

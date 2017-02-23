@@ -23,7 +23,7 @@ import br.com.tyllt.view.contracts.BaseView
 /**
  * Created by ferna on 2/18/2017.
  */
-class FilmsFragmentPresenter(val mPostman: Postman) : FilmsFragmentPresenterContract, BasePresenter(), ISubscriber {
+class FilmsFragmentPresenter(val mPostman: Postman) : FilmsFragmentPresenterContract, BasePresenter() {
 
     private val TAG = FilmsFragmentPresenter::class.simpleName
 
@@ -32,43 +32,11 @@ class FilmsFragmentPresenter(val mPostman: Postman) : FilmsFragmentPresenterCont
     private lateinit var mView: FilmsFragmentViewContract
 
     override fun takeView(_view: BaseView) {
-        registerForEvent(EventCatalog.e003, this)
-        registerForEvent(EventCatalog.e004, this)
-
         mView = _view as FilmsFragmentViewContract
         mContext = _view.getContext()
-        mPostman.readMovie(mView.getFilmUrl())
     }
 
     override fun dropView() {
         super.dropView()
-        unregisterForEvent(EventCatalog.e003, this)
-        unregisterForEvent(EventCatalog.e004, this)
-    }
-
-    /*
-    NETWORK HANDLING
-     */
-    override fun onEventTriggered(event: Events, payload: Any?) {
-        val wrapper = payload as ResponseWrapper
-        if (wrapper.success) {
-            when (event) {
-                EventCatalog.e003 -> {
-                    val movie = wrapper.payload as MovieDictionary
-                    mPostman.searchMovie(movie.title)
-                }
-                EventCatalog.e004 -> {
-                    val movie = wrapper.payload as TMDBWrapperResponseDictionary
-                    for (m in movie.results) {
-                        val posterUrl = "http://image.tmdb.org/t/p/original${m.backdrop_path}"
-                        val filmTitle = m.title
-
-                        Log.i(TAG, "Request to load poster: $posterUrl and title: $filmTitle")
-                        mView.loadFilm(posterUrl, filmTitle)
-                        break
-                    }
-                }
-            }
-        }
     }
 }

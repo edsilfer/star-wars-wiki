@@ -7,8 +7,5 @@ import br.com.tyllt.view.contracts.BaseView
  */
 interface FilmsFragmentViewContract : BaseView {
 
-    fun getFilmUrl () : String
-
-    fun loadFilm (url : String, title : String)
 
 }

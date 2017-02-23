@@ -27,7 +27,7 @@ import br.com.edsilfer.android.starwarswiki.view.dialogs.FancyLoadingDialog
 import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
 import br.com.edsilfer.kotlin_support.extensions.showInputDialog
 import br.com.edsilfer.kotlin_support.extensions.showUnderConstructionPopUp
-import br.com.tyllt.infrastructure.database.CharacterDAO
+import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import kotlinx.android.synthetic.main.activity_homepage.*

@@ -1,4 +1,4 @@
-package br.com.edsilfer.android.searchimages.model
+package br.com.edsilfer.android.starwarswiki.model.dictionary
 
 import com.google.gson.annotations.SerializedName
 
