@@ -41,7 +41,7 @@ class FilmsFragment : BaseFragment(), FilmsFragmentViewContract {
         fun newInstance(filmId: Long): FilmsFragment {
             val fragment = FilmsFragment()
             val args = Bundle()
-            args.putSerializable(ARG_FILM_ID, filmId)
+            args.putLong(ARG_FILM_ID, filmId)
             fragment.arguments = args
             return fragment
         }

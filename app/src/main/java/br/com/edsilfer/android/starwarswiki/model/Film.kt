@@ -9,11 +9,14 @@ import org.json.JSONObject
  * Created by ferna on 2/22/2017.
  */
 open class Film(
-        @PrimaryKey
-        open var id: String = "",
+        open var url: Long = 0.toLong(),
         open var image_url: String = "",
         open var title: String = ""
 ) : RealmObject() {
+
+    @PrimaryKey
+    open var id: Long = SUID.id()
+
     override fun toString(): String {
         val json = JSONObject()
         json.put("image_url", image_url)

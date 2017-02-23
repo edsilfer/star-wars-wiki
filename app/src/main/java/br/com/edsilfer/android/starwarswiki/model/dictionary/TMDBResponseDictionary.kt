@@ -9,7 +9,7 @@ class TMDBResponseDictionary {
     val vote_average = ""
     val backdrop_path = ""
     val adult = ""
-    val id = ""
+    val id : Long = 0.toLong()
     val title = ""
     val overview = ""
     val original_language = ""

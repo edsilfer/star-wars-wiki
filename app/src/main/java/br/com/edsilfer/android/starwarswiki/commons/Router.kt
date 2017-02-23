@@ -37,7 +37,7 @@ object Router {
         context.startActivity(intent)
     }
 
-    fun launchMovieUrl(context: AppCompatActivity, movieId: String) {
+    fun launchMovieUrl(context: AppCompatActivity, movieId: Long) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.themoviedb.org/movie/$movieId"))
         context.startActivity(intent)
     }
