@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">google search images</string>
+    <string name="str_communication_base_url">https://www.googleapis.com/customsearch/v1</string>
+    <string name="str_exception_invalid_api_or_application_key">Neither API key or Application key can be null or blank</string>
+    <string name="str_exception_request_failed">Request failed because response body is null or success flag is false</string>
+</resources>
