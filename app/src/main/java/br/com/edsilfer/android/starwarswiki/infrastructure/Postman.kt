@@ -59,7 +59,7 @@ class Postman {
                 .searchImage(
                         "star wars ${result.name}",
                         Utils.readProperty(ARG_APPLICATION_KEY),
-                        "jpeg",
+                        "jpg",
                         Utils.readProperty(ARG_API_ID)
                 )
                 .subscribeOn(Schedulers.newThread())

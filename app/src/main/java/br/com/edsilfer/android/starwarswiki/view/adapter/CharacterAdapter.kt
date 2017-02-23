@@ -82,7 +82,7 @@ class CharacterAdapter(
             mData.remove(character)
             notifyItemRemoved(index)
         } else {
-            notifyDataSetChanged()
+            mView.loadCachedCharacter()
         }
     }
 
