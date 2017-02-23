@@ -66,8 +66,10 @@ class Postman {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SimpleObserver<SearchResult>() {
                     override fun onSuccess(response: SearchResult) {
-                        val random = Random().nextInt(response.items.size)
-                        result.image_url = response.items[random].pagemap.metatags[0].imageUrl
+                        if (response.items != null && response.items.isNotEmpty()) {
+                            val random = Random().nextInt(response.items.size)
+                            result.image_url = response.items[random].pagemap.metatags[0].imageUrl
+                        }
                     }
 
                     override fun onError(e: Throwable?) {

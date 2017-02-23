@@ -77,9 +77,13 @@ class CharacterAdapter(
     }
 
     fun removeItem(character: br.com.edsilfer.android.starwarswiki.model.Character) {
-        val index = mData.indexOf(character)
-        mData.remove(character)
-        notifyItemRemoved(index)
+        if (character.isValid) {
+            val index = mData.indexOf(character)
+            mData.remove(character)
+            notifyItemRemoved(index)
+        } else {
+            notifyDataSetChanged()
+        }
     }
 
 }
