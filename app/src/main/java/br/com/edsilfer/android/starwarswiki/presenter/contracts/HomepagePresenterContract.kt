@@ -9,13 +9,13 @@ import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
  */
 interface HomepagePresenterContract {
 
-    fun searchByQrcode(view: View)
+    fun searchByQrCode(view: View)
 
     fun searchByUrl(view: View)
 
     fun onQRCodeRead(url: String)
 
-    fun onCameraPermissionGranted()
+    fun onPermissionsGranted()
 
     fun onForkMeClick()
 

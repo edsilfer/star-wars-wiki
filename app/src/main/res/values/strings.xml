@@ -34,5 +34,6 @@
     <string name="str_commons_token_loading">loading...</string>
     <string name="str_author_github_repository">https://github.com/edsilfer/star-wars-wiki</string>
     <string name="str_characters_dialog_title">Character Options</string>
+    <string name="str_error_no_film_url">No url was found for the given movie</string>
 
 </resources>

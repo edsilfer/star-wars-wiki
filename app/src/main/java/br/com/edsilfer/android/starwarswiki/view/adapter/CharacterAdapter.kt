@@ -1,5 +1,6 @@
 package br.com.edsilfer.android.starwarswiki.view.adapter
 
+import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +8,8 @@ import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.view.activities.contracts.HomepageViewContract
 import br.com.edsilfer.android.starwarswiki.view.viewholder.CharacterViewHolder
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
 import com.squareup.picasso.Picasso
 
 /**
@@ -17,6 +20,7 @@ class CharacterAdapter(
         val mView: HomepageViewContract,
         var mData: MutableList<br.com.edsilfer.android.starwarswiki.model.Character>
 ) : RecyclerView.Adapter<CharacterViewHolder>() {
+
 
     override fun getItemCount(): Int {
         return mData.size
@@ -40,6 +44,7 @@ class CharacterAdapter(
             holder.height.text = character.height.toString()
             holder.mass.text = character.mass.toString()
             holder.yob.text = character.birth_year
+            holder.url.text = character.url
 
             holder.wrapper.setOnClickListener {
                 mView.onCharacterClick(character)
@@ -72,9 +77,13 @@ class CharacterAdapter(
     }
 
     fun removeItem(character: br.com.edsilfer.android.starwarswiki.model.Character) {
-        val index = mData.indexOf(character)
-        mData.remove(character)
-        notifyItemRemoved(index)
+        if (character.isValid) {
+            val index = mData.indexOf(character)
+            mData.remove(character)
+            notifyItemRemoved(index)
+        } else {
+            notifyDataSetChanged()
+        }
     }
 
 }

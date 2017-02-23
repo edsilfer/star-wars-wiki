@@ -9,7 +9,7 @@ class TMDBResponseDictionary {
     val vote_average = ""
     val backdrop_path = ""
     val adult = ""
-    val id = ""
+    val id : Long = 0.toLong()
     val title = ""
     val overview = ""
     val original_language = ""
@@ -20,6 +20,7 @@ class TMDBResponseDictionary {
     val poster_path = ""
     val video = ""
     val popularity = ""
+    val homepage = ""
 
     override fun toString(): String {
         return Gson().toJson(this)

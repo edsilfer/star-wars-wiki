@@ -1,6 +1,8 @@
 package br.com.edsilfer.android.starwarswiki.presenter
 
 import android.Manifest
+import android.content.Context
+import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -23,13 +25,25 @@ import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationMan
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.unregisterForEvent
 import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import br.com.tyllt.view.contracts.BaseView
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationServices
 import java.util.*
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
 
 
 /**
  * Created by ferna on 2/18/2017.
  */
-class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, BasePresenter(), ISubscriber {
+class HomepagePresenter(val mPostman: Postman) :
+        HomepagePresenterContract,
+        BasePresenter(),
+        ISubscriber,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     companion object {
         val REQUEST_PERMISSION_CAMERA = 98
@@ -40,13 +54,16 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
     override fun hasEvents() = true
     private lateinit var mContext: AppCompatActivity
     private lateinit var mView: HomepageViewContract
-    private var mCharacter: Character? = null
+    private var mGoogleApiClient: GoogleApiClient? = null
+    private var mLastLocation = Pair(0.toDouble(), 0.toDouble())
 
     override fun takeView(_view: BaseView) {
         mView = _view as HomepageViewContract
         mContext = _view.getContext()
         registerForEvent(EventCatalog.e001, this)
         registerForEvent(EventCatalog.e002, this)
+        createGoogleAPIClient()
+        mGoogleApiClient?.connect()
     }
 
     override fun dropView() {
@@ -58,12 +75,12 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
     /*
     PRESENTER BUSINESS IMPLEMENTATION
      */
-    override fun searchByQrcode(view: View) {
-        if (mContext.checkPermission(Manifest.permission.CAMERA)) {
+    override fun searchByQrCode(view: View) {
+        if (mContext.checkPermission(Manifest.permission.CAMERA) && mContext.checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
             launchQRCodeScanner(mContext)
         } else {
             mContext.runOnUiThread {
-                ActivityCompat.requestPermissions(mContext, arrayOf(Manifest.permission.CAMERA), REQUEST_PERMISSION_CAMERA)
+                ActivityCompat.requestPermissions(mContext, arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_PERMISSION_CAMERA)
             }
         }
     }
@@ -79,10 +96,12 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
     override fun onQRCodeRead(url: String) {
         Log.i(TAG, "Read QR Code content is $url.")
         mView.showLoading()
+        mContext.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         mPostman.searchCharacter(url)
     }
 
-    override fun onCameraPermissionGranted() {
+    override fun onPermissionsGranted() {
+        onConnected(null)
         launchQRCodeScanner(mContext)
     }
 
@@ -118,9 +137,12 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
         if (wrapper.payload != null) {
             val character = wrapper.payload as Character
             if (!doesCharacterHasAlreadyBeenScanned(character)) {
-                Log.i(TAG, "Received complete character: $mCharacter")
+                character.latitude = mLastLocation.first.toString()
+                character.longitude = mLastLocation.second.toString()
                 CharacterDAO.create(character)
                 mView.addCharacter(character)
+            } else {
+                mContext.showErrorPopUp(R.string.str_error_already_already_exists)
             }
         }
     }
@@ -133,6 +155,34 @@ class HomepagePresenter(val mPostman: Postman) : HomepagePresenterContract, Base
             }
         }
         return false
+    }
+
+    /*
+    GOOGLE LOCATIONS SERVICES
+     */
+    private fun createGoogleAPIClient() {
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = GoogleApiClient.Builder(mContext)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build()
+        }
+    }
+
+    override fun onConnected(p0: Bundle?) {
+        run {
+            val location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient!!)
+            if (location != null) {
+                mLastLocation = Pair(location.latitude, location.longitude)
+            }
+        }
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
     }
 
 }

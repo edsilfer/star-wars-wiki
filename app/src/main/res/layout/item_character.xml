@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/wrapper"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -52,76 +53,78 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dip"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="5">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dip"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/yob"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_birth_date"
-                    android:drawablePadding="3dp"
-                    android:drawableStart="@drawable/ic_birth_date"
-                    android:fontFamily="sans-serif-thin"
-                    android:text="1235"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/textH2" />
-
-                <TextView
-                    android:id="@+id/gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dip"
-                    android:drawableLeft="@drawable/ic_gender"
-                    android:drawablePadding="3dp"
-                    android:drawableStart="@drawable/ic_gender"
-                    android:fontFamily="sans-serif-thin"
-                    android:text="male"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/textH2" />
-            </LinearLayout>
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_gender"
+                android:drawablePadding="3dp"
+                android:drawableStart="@drawable/ic_gender"
+                android:fontFamily="sans-serif-thin"
+                android:text="male"
+                android:textColor="#000000"
+                android:textSize="@dimen/textH4" />
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/height"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dip"
-                android:layout_marginStart="50dip"
-                android:layout_marginTop="2dip"
-                android:orientation="vertical">
+                android:layout_marginLeft="5dip"
+                android:layout_marginStart="5dip"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_height"
+                android:drawablePadding="3dp"
+                android:drawableStart="@drawable/ic_height"
+                android:fontFamily="sans-serif-thin"
+                android:text="176"
+                android:textColor="#000000"
+                android:textSize="@dimen/textH4" />
 
-                <TextView
-                    android:id="@+id/height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_height"
-                    android:drawablePadding="3dp"
-                    android:drawableStart="@drawable/ic_height"
-                    android:fontFamily="sans-serif-thin"
-                    android:text="176"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/textH3" />
+            <TextView
+                android:id="@+id/mass"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginStart="5dip"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_weight"
+                android:drawablePadding="3dp"
+                android:drawableStart="@drawable/ic_weight"
+                android:fontFamily="sans-serif-thin"
+                android:text="75"
+                android:textColor="#000000"
+                android:textSize="@dimen/textH4" />
 
-                <TextView
-                    android:id="@+id/mass"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dip"
-                    android:drawableLeft="@drawable/ic_weight"
-                    android:drawablePadding="3dp"
-                    android:drawableStart="@drawable/ic_weight"
-                    android:fontFamily="sans-serif-thin"
-                    android:text="75"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/textH3" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/yob"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:drawableLeft="@drawable/ic_birth_date"
+                android:drawablePadding="3dp"
+                android:drawableStart="@drawable/ic_birth_date"
+                android:fontFamily="sans-serif-thin"
+                android:text="1235"
+                android:textColor="#000000"
+                android:textSize="@dimen/textH4" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dip"
+            android:fontFamily="sans-serif-thin"
+            android:text="http://swapi/api/people/1"
+            android:textColor="#000000"
+            android:textSize="@dimen/textH3" />
     </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"
