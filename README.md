@@ -51,10 +51,14 @@ Create an application capable to read urls from Star Wars API, displaying these 
 <a name="qrcode-examples" />
 ## QR Code Samples
 
+<p align="center">
+  <img src="qrcodes/sample_01_luck_skywalker.jpg" align="center" width=200>
+  <img src="qrcodes/sample_01_c3po.jpg" align="center" width=200>
+  <br />
+  <b>Figure 01:</b> sample qr codes generated on: http://br.qr-code-generator.com/ 
+</p>
 
-Figure 01: sample qr codes generated on: http://br.qr-code-generator.com/ 
-
-Individual image can be found [here]()..
+_Individual image can be found [here](https://github.com/edsilfer/star-wars-wiki/tree/master/qrcodes)_
 
 <a name="architecture" />
 # Architecture
@@ -64,6 +68,10 @@ View: the view layer is passive - as per article on Martin Fowler’s article - 
 Presenter: this layer is the mean term among business rules and view layer. It can be, in some cases, the messenger that deliver UI events to be processed by business objects on model layer or, it can process them itself. In this application, the Presenter layer is responsible to execute business rules and also trigger their outcome to view layer. Network event handling, must be executed on this layer.
 
 Below there is a sequence diagram that shows the basic configuration of model and presenter layers on a typical activity or fragment:
+
+<p align="center">
+  <img src="blueprints/blueprint_01.png" align="center" width=350>
+</p>
 
 
 <a name="design-patterns" />
