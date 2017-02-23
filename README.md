@@ -40,12 +40,14 @@ Create an application capable to read urls from Star Wars API, displaying these 
 ## Showcase
 
 <p align="center">
-  <img src="showcase/showcase_01.jpeg" align="center" width=120>
-  <img src="showcase/showcase_02.jpeg" align="center" width=120>
-  <img src="showcase/showcase_03.jpeg" align="center" width=120>
-  <img src="showcase/showcase_04.jpeg" align="center" width=120>
-  <img src="showcase/showcase_07.jpeg" align="center" width=120>
-  <img src="showcase/showcase_08.jpeg" align="center" width=120>
+  <img src="showcase/showcase_01.jpeg" align="center" width=175>
+  <img src="showcase/showcase_02.jpeg" align="center" width=175>
+  <img src="showcase/showcase_04.jpeg" align="center" width=175>
+  <img src="showcase/showcase_05.jpeg" align="center" width=175><br />
+  <img src="showcase/showcase_06.jpeg" align="center" width=175>
+  <img src="showcase/showcase_07.jpeg" align="center" width=175>
+  <img src="showcase/showcase_08.jpeg" align="center" width=175>
+  <img src="showcase/showcase_09.jpeg" align="center" width=175>
 </p>
 
 <a name="qrcode-examples" />
