@@ -1,6 +1,7 @@
 package br.com.edsilfer.android.starwarswiki.infrastructure.retrofit
 
 import br.com.edsilfer.android.starwarswiki.model.dictionary.TMDBWrapperResponseDictionary
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,6 +12,6 @@ import retrofit2.http.Query
 interface TMDBEndPoint {
 
     @GET("search/movie/")
-    fun searchMovies(@Query("api_key") key: String, @Query("query") name: String): Call<TMDBWrapperResponseDictionary>
+    fun searchMovies(@Query("api_key") key: String, @Query("query") name: String): Observable<TMDBWrapperResponseDictionary>
 
 }

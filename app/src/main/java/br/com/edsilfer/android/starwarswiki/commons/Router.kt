@@ -9,6 +9,7 @@ import br.com.edsilfer.android.starwarswiki.infrastructure.App.Companion.getCont
 import br.com.edsilfer.android.starwarswiki.view.activities.FilmsActivity
 import br.com.edsilfer.android.starwarswiki.view.activities.HomepageActivity
 import br.com.edsilfer.android.starwarswiki.view.activities.QRCodeScannerActivity
+import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
 import java.util.*
 
 
@@ -19,7 +20,7 @@ import java.util.*
 object Router {
 
     const val REQUEST_QRCODE_READER = 987
-    const val ARG_URLS = "ARG_URLS"
+    const val ARG_CHARACTER_ID = "ARG_CHARACTER_ID"
 
     fun launchHomepageActivity(context: Context) {
         val intent = Intent(context, HomepageActivity::class.java)
@@ -36,9 +37,14 @@ object Router {
         context.startActivity(intent)
     }
 
-    fun launchFilmsActivity(context: Context, urls: ArrayList<String>) {
+    fun launchMovieUrl(context: AppCompatActivity, movieId: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.themoviedb.org/movie/$movieId"))
+        context.startActivity(intent)
+    }
+
+    fun launchFilmsActivity(context: Context, characterId: Long) {
         val intent = Intent(context, FilmsActivity::class.java)
-        intent.putStringArrayListExtra(ARG_URLS, urls)
+        intent.putExtra(ARG_CHARACTER_ID, characterId)
         context.startActivity(intent)
     }
 

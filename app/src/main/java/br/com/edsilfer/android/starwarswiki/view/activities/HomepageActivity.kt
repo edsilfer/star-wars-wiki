@@ -27,7 +27,7 @@ import br.com.edsilfer.android.starwarswiki.view.dialogs.FancyLoadingDialog
 import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
 import br.com.edsilfer.kotlin_support.extensions.showInputDialog
 import br.com.edsilfer.kotlin_support.extensions.showUnderConstructionPopUp
-import br.com.tyllt.infrastructure.database.CharacterDAO
+import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import kotlinx.android.synthetic.main.activity_homepage.*
@@ -88,7 +88,7 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
-            REQUEST_PERMISSION_CAMERA -> mPresenter.onCameraPermissionGranted()
+            REQUEST_PERMISSION_CAMERA -> mPresenter.onPermissionsGranted()
         }
     }
 
@@ -180,8 +180,12 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
     }
 
     override fun removeCharacter(character: Character) {
-        val adapter = characters.adapter as CharacterAdapter
-        adapter.removeItem(character)
+        runOnUiThread {
+            val adapter = characters.adapter as CharacterAdapter
+            adapter.removeItem(character)
+            val characterObjects = adapter.mData
+            collection_loading_feedback.showFeedback(characters, characterObjects)
+        }
     }
 
     override fun loadCachedCharacter() {

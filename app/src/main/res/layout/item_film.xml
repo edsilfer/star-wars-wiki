@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
             android:orientation="vertical">
 
             <ImageView
@@ -37,8 +38,8 @@
                 android:layout_height="400dip"
                 android:layout_marginLeft="40dip"
                 android:layout_marginRight="40dip"
-                android:elevation="4dp"/>
-
+                android:background="@android:color/transparent"
+                android:elevation="4dp" />
 
             <TextView
                 android:id="@+id/name"
@@ -47,6 +48,7 @@
                 android:layout_marginLeft="15dip"
                 android:layout_marginRight="15dip"
                 android:layout_marginTop="15dip"
+                android:background="@android:color/transparent"
                 android:shadowColor="@color/colorTextShadow"
                 android:shadowRadius="5"
                 android:text="@string/str_commons_token_loading"

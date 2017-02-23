@@ -2,6 +2,7 @@ package br.com.edsilfer.android.starwarswiki.model
 
 import br.com.edsilfer.android.starwarswiki.commons.util.SUID
 import br.com.edsilfer.android.starwarswiki.model.dictionary.CharacterDictionary
+import com.google.gson.annotations.SerializedName
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.Ignore
@@ -35,7 +36,7 @@ open class Character : RealmObject() {
             result.image_url = dictionary.image_url
 
             for (f in dictionary.films) {
-                result.films.add(RealmString(f))
+                result.films_urls.add(RealmString(f))
             }
 
             return result
@@ -56,10 +57,16 @@ open class Character : RealmObject() {
     open var edited: Date = Date()
     open var url: String = ""
     open var image_url: String = ""
+    @SerializedName("movies")
+    open var films: RealmList<Film> = RealmList()
     /*
     Realm doesn't accept list of primitive types yet, so we need a workaround in order to make it work
      */
-    open var films: RealmList<RealmString> = RealmList()
+    @SerializedName("films")
+    open var films_urls: RealmList<RealmString> = RealmList()
+    open var latitude: String = ""
+    open var longitude: String = ""
+
 
     override fun toString(): String {
         /*
@@ -77,7 +84,14 @@ open class Character : RealmObject() {
         json.put("gender", gender)
         json.put("created", created)
         json.put("edited", edited)
-        json.put("url", url)
+        json.put("image_url", url)
+        json.put("image_url", image_url)
+        val _films = JSONArray()
+        for (f in films) {
+            _films.put(f.toString())
+        }
+        json.put("films", _films)
         return json.toString()
     }
+
 }

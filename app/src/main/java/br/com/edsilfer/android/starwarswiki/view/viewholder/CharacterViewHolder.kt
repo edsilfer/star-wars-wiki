@@ -18,4 +18,6 @@ class CharacterViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView) {
     val height = rootView.findViewById(R.id.height) as TextView
     val mass = rootView.findViewById(R.id.mass) as TextView
     val yob = rootView.findViewById(R.id.yob) as TextView
+    val url = rootView.findViewById(R.id.url) as TextView
 }
+
