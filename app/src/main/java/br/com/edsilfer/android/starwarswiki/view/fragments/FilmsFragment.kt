@@ -9,6 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.infrastructure.dagger.Injector
+import br.com.edsilfer.android.starwarswiki.infrastructure.database.FilmDAO
+import br.com.edsilfer.android.starwarswiki.model.Film
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.FilmsFragmentPresenterContract
 import br.com.edsilfer.android.starwarswiki.view.activities.contracts.FilmsFragmentViewContract
@@ -25,7 +27,7 @@ class FilmsFragment : BaseFragment(), FilmsFragmentViewContract {
 
     override fun getPresenter() = mPresenter as BasePresenter
     override fun getContext() = activity as AppCompatActivity
-    private lateinit var mUrl: String
+    private lateinit var mFilm: Film
     private lateinit var mImage: ImageView
     private lateinit var mName: TextView
 
@@ -34,11 +36,11 @@ class FilmsFragment : BaseFragment(), FilmsFragmentViewContract {
     }
 
     companion object {
-        private val ARG_URL = "ARG_URL"
-        fun newInstance(url: String): FilmsFragment {
+        private val ARG_FILM_ID = "ARG_FILM_ID"
+        fun newInstance(filmId: Long): FilmsFragment {
             val fragment = FilmsFragment()
             val args = Bundle()
-            args.putSerializable(ARG_URL, url)
+            args.putSerializable(ARG_FILM_ID, filmId)
             fragment.arguments = args
             return fragment
         }
@@ -46,21 +48,24 @@ class FilmsFragment : BaseFragment(), FilmsFragmentViewContract {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.item_film, container, false)
-        mUrl = arguments.getString(ARG_URL)
+        mFilm = FilmDAO.read(arguments.getLong(ARG_FILM_ID))!!
         mImage = rootView.findViewById(R.id.image) as ImageView
         mName = rootView.findViewById(R.id.name) as TextView
         return rootView
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadFilm()
+    }
+
     /*
     VIEW CONTRACT
      */
-    override fun getFilmUrl() = mUrl
-
-    override fun loadFilm(url: String, name: String) {
+    private fun loadFilm() {
         activity.runOnUiThread {
-            mName.text = name
-            Picasso.with(context).load(url).fit().centerCrop().into(mImage)
+            mName.text = mFilm.title
+            Picasso.with(context).load(mFilm.url).fit().centerCrop().into(mImage)
         }
     }
 }

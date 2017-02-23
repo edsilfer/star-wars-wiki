@@ -1,7 +1,7 @@
 package br.com.edsilfer.android.searchimages.communication
 
-import br.com.edsilfer.android.searchimages.model.SearchResult
-import retrofit2.Call
+import br.com.edsilfer.android.starwarswiki.model.dictionary.SearchResult
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -20,8 +20,8 @@ interface GCSAPIEndPoint {
     @GET("v1")
     fun searchImage(
             @Query(QUERY_ARG_QUERY) query: String,
-            @Query(encoded = true, value = QUERY_ARG_APPLICATION_ID) applicationId: String,
+            @Query(encoded = true, value = QUERY_ARG_APPLICATION_ID) applicationKey: String,
             @Query(QUERY_ARG_FILE_TYPE) fileType: String,
             @Query(QUERY_ARG_API_ID) key: String
-    ): Call<SearchResult>
+    ): Observable<SearchResult>
 }

@@ -3,13 +3,14 @@ package br.com.edsilfer.android.starwarswiki.view.activities
 import android.os.Bundle
 import android.util.Log
 import br.com.edsilfer.android.starwarswiki.R
-import br.com.edsilfer.android.starwarswiki.commons.Router.ARG_URLS
+import br.com.edsilfer.android.starwarswiki.commons.Router.ARG_CHARACTER_ID
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
 import br.com.edsilfer.android.starwarswiki.infrastructure.dagger.Injector
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.FilmsActivityPresenterContract
 import br.com.edsilfer.android.starwarswiki.view.activities.contracts.FilmsActivityViewContract
 import br.com.edsilfer.android.starwarswiki.view.adapter.FilmsAdapter
+import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import kotlinx.android.synthetic.main.activity_film.*
 import javax.inject.Inject
 
@@ -30,7 +31,7 @@ class FilmsActivity : BaseActivity(), FilmsActivityViewContract {
 
     override fun getContext() = this
     override fun getPresenter() = mPresenter as BasePresenter
-    private var mUrls = mutableListOf <String>()
+    private var mCharacter = br.com.edsilfer.android.starwarswiki.model.Character()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +44,8 @@ class FilmsActivity : BaseActivity(), FilmsActivityViewContract {
 
     private fun retrieveUrls() {
         try {
-            mUrls = intent.extras.getStringArrayList(ARG_URLS)
-            Log.i(TAG, "Received Urls: $mUrls")
+            mCharacter = CharacterDAO.read(intent.extras.getLong(ARG_CHARACTER_ID))!!
+            Log.i(TAG, "Received character: $mCharacter")
         } catch (e: Exception) {
             throw IllegalArgumentException("FilmsActivity requeries a list of urls in order to work")
         }
@@ -59,6 +60,6 @@ class FilmsActivity : BaseActivity(), FilmsActivityViewContract {
     }
 
     private fun initViewPager() {
-        films.adapter = FilmsAdapter(supportFragmentManager, mUrls)
+        films.adapter = FilmsAdapter(supportFragmentManager, mCharacter.films)
     }
 }
