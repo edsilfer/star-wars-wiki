@@ -33,7 +33,7 @@ object Router {
     }
 
     fun launchGitHubLink(context: Context) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getContext().getString(R.string.str_author_github_repository)))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(context.getString(R.string.str_author_github_repository)))
         context.startActivity(intent)
     }
 
