@@ -25,13 +25,29 @@ interface HomepageViewContract : BaseView {
      */
     fun removeCharacter(character: Character)
 
+    /**
+     * Opens film details activity
+     */
     fun onCharacterClick(character: Character)
 
     /*
-    Deleter character entry from database
+    Deletes character entry from database
      */
     fun deleteCharacter(character: Character)
 
+    /*
+    Displays a pop up to gather character's url
+     */
     fun showGetUrlPopUp()
+
+    /*
+    Request permission for Camera and Access Coarse Location
+     */
+    fun requestAppPermissions()
+
+    /**
+     * Forces soft keyboard to close
+     */
+    fun dismissSoftKeyboard ()
 
 }

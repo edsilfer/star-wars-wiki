@@ -1,21 +1,25 @@
 package br.com.edsilfer.android.starwarswiki.view.activities
 
+import android.Manifest
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.MenuItem
+import android.view.WindowManager
 import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.commons.Router.REQUEST_QRCODE_READER
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchGitHubLink
 import br.com.edsilfer.android.starwarswiki.databinding.ActivityHomepageBinding
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
 import br.com.edsilfer.android.starwarswiki.infrastructure.dagger.Injector
+import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import br.com.edsilfer.android.starwarswiki.model.Character
 import br.com.edsilfer.android.starwarswiki.presenter.HomepagePresenter.Companion.REQUEST_PERMISSION_CAMERA
 import br.com.edsilfer.android.starwarswiki.presenter.QRCodeScannerPresenter.Companion.ARG_RESULT_URL
@@ -27,7 +31,6 @@ import br.com.edsilfer.android.starwarswiki.view.dialogs.FancyLoadingDialog
 import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
 import br.com.edsilfer.kotlin_support.extensions.showInputDialog
 import br.com.edsilfer.kotlin_support.extensions.showUnderConstructionPopUp
-import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import kotlinx.android.synthetic.main.activity_homepage.*
@@ -220,6 +223,16 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
 
     override fun deleteCharacter(character: Character) {
         mPresenter.deleteCharacter(character)
+    }
+
+    override fun requestAppPermissions() {
+        runOnUiThread {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_PERMISSION_CAMERA)
+        }
+    }
+
+    override fun dismissSoftKeyboard() {
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 
 }

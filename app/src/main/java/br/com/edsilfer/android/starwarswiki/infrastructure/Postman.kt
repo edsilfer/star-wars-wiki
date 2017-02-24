@@ -27,13 +27,13 @@ import java.util.*
  * Created by ferna on 2/18/2017.
  */
 
-class Postman {
+open class Postman {
 
     private val TAG = Postman::class.simpleName
     private val ARG_APPLICATION_KEY = "gcs.application.key"
     private val ARG_API_ID = "gcs.api.key"
 
-    fun searchCharacter(url: String) {
+    open fun searchCharacter(url: String) {
         var result: Character? = null
         getSWAPIEndPoint()
                 .readPerson(url)

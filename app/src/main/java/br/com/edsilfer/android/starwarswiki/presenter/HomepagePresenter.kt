@@ -1,17 +1,17 @@
 package br.com.edsilfer.android.starwarswiki.presenter
 
 import android.Manifest
-import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.commons.Router
+import br.com.edsilfer.android.starwarswiki.commons.Router.launchFilmsActivity
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchGitHubLink
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchQRCodeScanner
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
+import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import br.com.edsilfer.android.starwarswiki.model.Character
 import br.com.edsilfer.android.starwarswiki.model.ResponseWrapper
 import br.com.edsilfer.android.starwarswiki.model.enum.EventCatalog
@@ -19,26 +19,21 @@ import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.HomepagePresenterContract
 import br.com.edsilfer.android.starwarswiki.view.activities.contracts.HomepageViewContract
 import br.com.edsilfer.kotlin_support.extensions.checkPermission
+import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
 import br.com.edsilfer.kotlin_support.model.Events
 import br.com.edsilfer.kotlin_support.model.ISubscriber
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.registerForEvent
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.RegistrationManager.unregisterForEvent
-import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import br.com.tyllt.view.contracts.BaseView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationServices
-import java.util.*
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
 
 
 /**
  * Created by ferna on 2/18/2017.
  */
-class HomepagePresenter(val mPostman: Postman) :
+open class HomepagePresenter(val mPostman: Postman) :
         HomepagePresenterContract,
         BasePresenter(),
         ISubscriber,
@@ -52,10 +47,16 @@ class HomepagePresenter(val mPostman: Postman) :
     private val TAG = HomepagePresenter::class.simpleName
 
     override fun hasEvents() = true
-    private lateinit var mContext: AppCompatActivity
-    private lateinit var mView: HomepageViewContract
+    protected lateinit var mContext: AppCompatActivity
+    protected lateinit var mView: HomepageViewContract
     private var mGoogleApiClient: GoogleApiClient? = null
     private var mLastLocation = Pair(0.toDouble(), 0.toDouble())
+    private var mPermissionRequester = PermissionRequester.QR_CODE_SCANNER
+
+    enum class PermissionRequester {
+        URL_POPUP,
+        QR_CODE_SCANNER
+    }
 
     override fun takeView(_view: BaseView) {
         mView = _view as HomepageViewContract
@@ -79,14 +80,18 @@ class HomepagePresenter(val mPostman: Postman) :
         if (mContext.checkPermission(Manifest.permission.CAMERA) && mContext.checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
             launchQRCodeScanner(mContext)
         } else {
-            mContext.runOnUiThread {
-                ActivityCompat.requestPermissions(mContext, arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_PERMISSION_CAMERA)
-            }
+            mView.requestAppPermissions()
+            mPermissionRequester = PermissionRequester.QR_CODE_SCANNER
         }
     }
 
     override fun searchByUrl(view: View) {
-        mView.showGetUrlPopUp()
+        if (mContext.checkPermission(Manifest.permission.CAMERA) && mContext.checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            mView.showGetUrlPopUp()
+        } else {
+            mView.requestAppPermissions()
+            mPermissionRequester = PermissionRequester.URL_POPUP
+        }
     }
 
     override fun onUrlType(url: String) {
@@ -96,13 +101,16 @@ class HomepagePresenter(val mPostman: Postman) :
     override fun onQRCodeRead(url: String) {
         Log.i(TAG, "Read QR Code content is $url.")
         mView.showLoading()
-        mContext.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+        mView.dismissSoftKeyboard()
         mPostman.searchCharacter(url)
     }
 
     override fun onPermissionsGranted() {
         onConnected(null)
-        launchQRCodeScanner(mContext)
+        when (mPermissionRequester) {
+            PermissionRequester.QR_CODE_SCANNER -> launchQRCodeScanner(mContext)
+            PermissionRequester.URL_POPUP -> mView.showGetUrlPopUp()
+        }
     }
 
     override fun onForkMeClick() {
@@ -110,7 +118,7 @@ class HomepagePresenter(val mPostman: Postman) :
     }
 
     override fun onCharacterClick(character: Character) {
-        Router.launchFilmsActivity(mContext, character.id)
+        launchFilmsActivity(mContext, character.id)
     }
 
     override fun deleteCharacter(character: Character) {
