@@ -34,34 +34,45 @@ public class AutomationTestStory001 {
 
     @Test
     public void automationTestStory001() {
-        // Open FAB Menu
-        onView(withId(R.id.fab_menu)).perform(click());
+        toggleFABMenuState();
+        openSearchCharacterByURLDialog();
+        grantCameraAndAccessCoarseLocationPermissions();
+        typeCharacterURL();
+        toggleFABMenuState();
+        showCharacterOptions();
+        deleteCharacter();
+    }
 
-        // Click search by URL
-        onView(allOf(withClassName(is("com.github.clans.fab.FloatingActionButton")),
-                withParent(withId(R.id.fab_menu)),
-                isDisplayed())).perform(click());
-
-        // Grant permissions
-        Utils.allowPermissionsIfNeeded("android.permission.CAMERA");
-        Utils.allowPermissionsIfNeeded("android.permission.ACCESS_COARSE_LOCATION");
-
-        // Type character URL
-        onView(withId(R.id.input1)).perform(click());
-        onView(withId(R.id.input1)).perform(replaceText("http://swapi.co/api/people/1"), closeSoftKeyboard());
-        onView(withId(R.id.okay)).perform(click());
-
-        // Close FAB Menu
-        onView(withId(R.id.fab_menu)).perform(click());
-
-        // Open character options
+    private void showCharacterOptions() {
         onView(allOf(withId(R.id.wrapper), withParent(withId(R.id.characters)), isDisplayed())).perform(longClick());
+    }
 
-        // Remove character
+    private void deleteCharacter() {
         onView(allOf(withId(R.id.md_contentRecyclerView),
                 withParent(withId(R.id.md_contentListViewFrame)),
                 isDisplayed())
         ).perform(actionOnItemAtPosition(0, click()));
+    }
+
+    private void typeCharacterURL() {
+        onView(withId(R.id.input1)).perform(click());
+        onView(withId(R.id.input1)).perform(replaceText("http://swapi.co/api/people/1"), closeSoftKeyboard());
+        onView(withId(R.id.okay)).perform(click());
+    }
+
+    private void grantCameraAndAccessCoarseLocationPermissions() {
+        Utils.allowPermissionsIfNeeded("android.permission.CAMERA");
+        Utils.allowPermissionsIfNeeded("android.permission.ACCESS_COARSE_LOCATION");
+    }
+
+    private void openSearchCharacterByURLDialog() {
+        onView(allOf(withClassName(is("com.github.clans.fab.FloatingActionButton")),
+                withParent(withId(R.id.fab_menu)),
+                isDisplayed())).perform(click());
+    }
+
+    private void toggleFABMenuState() {
+        onView(withId(R.id.fab_menu)).perform(click());
     }
 
 }
