@@ -8,12 +8,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import br.com.edsilfer.android.starwarswiki.R
 
 
 /**
- * Created by ferna on 2/20/2017.
+ * Dialog that displays a fancy loading full screen
  */
 class FancyLoadingDialog : DialogFragment() {
 
@@ -23,11 +22,13 @@ class FancyLoadingDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return dialog
     }
 
     companion object {
+        /**
+         * Displays a fancy full screen loading dialog
+         */
         fun showDialog(activity: AppCompatActivity): FancyLoadingDialog {
             val dialog = FancyLoadingDialog()
             val fragmentManager = activity.supportFragmentManager

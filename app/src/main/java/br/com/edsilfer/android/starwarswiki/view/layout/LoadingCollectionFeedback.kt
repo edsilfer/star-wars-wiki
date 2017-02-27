@@ -12,6 +12,9 @@ import android.widget.TextView
 import br.com.edsilfer.android.starwarswiki.R
 import kotlinx.android.synthetic.main.rsc_util_loading_collection_feedback.view.*
 
+/**
+ * Custom Layout that provides a mechanism to show empty list or display the RecyclerView with its results
+ */
 class LoadingCollectionFeedback : RelativeLayout {
     constructor(context: Context) : super(context) {
         init(null)

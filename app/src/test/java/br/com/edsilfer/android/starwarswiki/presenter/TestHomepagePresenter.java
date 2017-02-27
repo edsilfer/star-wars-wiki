@@ -1,4 +1,4 @@
-package br.com.edsilfer.android.starwarswiki;
+package br.com.edsilfer.android.starwarswiki.presenter;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -21,9 +21,8 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import br.com.edsilfer.android.starwarswiki.commons.Router;
-import br.com.edsilfer.android.starwarswiki.infrastructure.Postman;
 import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO;
-import br.com.edsilfer.android.starwarswiki.presenter.HomepagePresenter;
+import br.com.edsilfer.android.starwarswiki.util.MockedPostman;
 import br.com.edsilfer.android.starwarswiki.view.activities.contracts.HomepageViewContract;
 import br.com.edsilfer.kotlin_support.service.NotificationCenter;
 
@@ -184,15 +183,4 @@ public class TestHomepagePresenter {
             mContext = mMockedContext;
         }
     }
-
-    /**
-     * REQUIRED CLASS DUE TO DO MOCKITO NOTHING BUG
-     */
-    public class MockedPostman extends Postman {
-        @Override
-        public void searchCharacter(@NotNull String url) {
-            super.searchCharacter(url);
-        }
-    }
-
 }
