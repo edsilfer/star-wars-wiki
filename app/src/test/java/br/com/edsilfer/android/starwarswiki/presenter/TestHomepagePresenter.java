@@ -25,6 +25,7 @@ import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import br.com.edsilfer.android.starwarswiki.util.MockedPostman;
 import br.com.edsilfer.android.starwarswiki.view.activities.contracts.HomepageViewContract;
 import br.com.edsilfer.kotlin_support.service.NotificationCenter;
+import br.com.tyllt.infrastructure.database.GenericDAO;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -43,7 +44,8 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
         LocationServices.class,
         Uri.class,
         FusedLocationProviderApi.class,
-        CharacterDAO.class
+        CharacterDAO.class,
+        GenericDAO.class
 })
 public class TestHomepagePresenter {
 
@@ -68,6 +70,7 @@ public class TestHomepagePresenter {
         mockStatic(Uri.class);
         mockStatic(FusedLocationProviderApi.class);
         mockStatic(CharacterDAO.class);
+        mockStatic(GenericDAO.class);
 
         when(mMockedView.getContext()).thenReturn(mMockedContext);
 
@@ -137,37 +140,20 @@ public class TestHomepagePresenter {
         verify(mMockedContext).startActivity(any(Intent.class));
     }
 
-    /*
-    FIXME: INTENT NOT MOCKED FAILURE
-     */
     @Test
     public void testOnCharacterClick() {
-        /*try {
-            PowerMockito.whenNew(Intent.class).withArguments(mMockedContext, FilmsActivity.class).thenReturn(mMockedIntent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         br.com.edsilfer.android.starwarswiki.model.Character mockedCharacter = new br.com.edsilfer.android.starwarswiki.model.Character();
         mPresenter.onCharacterClick(mockedCharacter);
-        verify(mMockedContext).startActivity(any(Intent.class));*/
+        verify(mMockedContext).startActivity(any(Intent.class));
     }
 
     /*
-    FIXME: DO NOTHING NOT WORKING
+    FIXME: How can one mock a Kotlin object class? http://stackoverflow.com/questions/42490850/how-to-mock-kotlins-object-class
      */
     @Test
     public void testDeleteCharacter() {
-        /*doNothing().doThrow(Exception.class).when(CharacterDAO.class);
-
-        CharacterDAO characterDAO = mock(CharacterDAO.class);
-        try {
-            doNothing().when(CharacterDAO.class, "delete", characterDAO);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        br.com.edsilfer.android.starwarswiki.model.Character mockedCharacter = new br.com.edsilfer.android.starwarswiki.model.Character();
+        /*
+        Character mockedCharacter = new Character();
         mPresenter.deleteCharacter(mockedCharacter);
         verifyStatic();
         verify(mMockedView).removeCharacter(mockedCharacter);*/
@@ -183,4 +169,5 @@ public class TestHomepagePresenter {
             mContext = mMockedContext;
         }
     }
+
 }

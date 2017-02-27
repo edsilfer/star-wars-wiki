@@ -1,6 +1,6 @@
 package br.com.edsilfer.android.starwarswiki.presenter
 
-import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
@@ -13,10 +13,10 @@ import br.com.tyllt.view.contracts.BaseView
 /**
  * Presenter Layer for QR Code scanner
  */
-open class QRCodeScannerPresenter(val mPostman: Postman) : QRCodeScannerPresenterContract, BasePresenter() {
+public open class QRCodeScannerPresenter(val mPostman: Postman) : QRCodeScannerPresenterContract, BasePresenter() {
 
     companion object {
-        val ARG_RESULT_URL = "ARG_RESULT_URL"
+        public val ARG_RESULT_URL = "ARG_RESULT_URL"
     }
 
     override fun hasEvents() = true
@@ -34,7 +34,7 @@ open class QRCodeScannerPresenter(val mPostman: Postman) : QRCodeScannerPresente
     override fun onQRCodeScanResult(url: String) {
         val intent = Intent()
         intent.putExtra(ARG_RESULT_URL, url)
-        mContext.setResult(Activity.RESULT_OK, intent)
+        mContext.setResult(RESULT_OK, intent)
         mContext.finish()
     }
 }

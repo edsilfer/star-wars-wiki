@@ -1,7 +1,6 @@
 package br.com.edsilfer.android.starwarswiki.presenter.contracts
 
 import br.com.edsilfer.android.starwarswiki.commons.NetworkManager
-import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
 import br.com.edsilfer.android.starwarswiki.model.EventMessage
 import br.com.tyllt.view.contracts.BaseView
 

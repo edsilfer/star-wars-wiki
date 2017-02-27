@@ -25,6 +25,10 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
     dataBinding {
         enabled = true
     }

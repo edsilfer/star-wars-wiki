@@ -7,7 +7,6 @@ import br.com.edsilfer.android.starwarswiki.model.dictionary.CharacterDictionary
 import br.com.edsilfer.android.starwarswiki.model.dictionary.MovieDictionary
 import br.com.edsilfer.android.starwarswiki.model.dictionary.TMDBWrapperResponseDictionary
 import br.com.edsilfer.android.starwarswiki.model.enum.EventCatalog
-import br.com.edsilfer.kotlin_support.service.NotificationCenter
 import br.com.edsilfer.kotlin_support.service.NotificationCenter.notify
 import retrofit2.Call
 import retrofit2.Callback
