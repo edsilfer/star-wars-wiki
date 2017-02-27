@@ -110,7 +110,7 @@ The application follows Model-View-Presenter (MVP) pattern:
 Below there is a sequence diagram that shows the basic configuration of model and presenter layers on a typical activity or fragment:
 
 <p align="center">
-  <img src="blueprints/blueprint_01.png" align="center" width=350>
+  <img src="blueprints/blueprint_01.png" align="center" width=450>
 </p>
 
 
