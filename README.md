@@ -7,6 +7,7 @@
    * [QR Code Samples](#qrcode-examples) 
 2. [Architecture](#architecture) 
    * [Design Patterns](#design-patterns) 
+   * [Quality Assurance](#tests) 
    * [Frameworks](#frameworks) 
    * [End Points](#end-points) 
 4. [License](#license)
@@ -65,9 +66,9 @@ _Individual image can be found [here](https://github.com/edsilfer/star-wars-wiki
 <a name="architecture" />
 # Architecture
 The application follows Model-View-Presenter (MVP) pattern:
-Model: layer that holds classes that describe Business Objects. As an ORM (see Realm) is being used, these classes also acts as template for generating the database. Despite these core business objects, model layer also provides enums that helps controlling the application logical flow in an elegant way and dictionaries. Dictionaries are POJO classes that matches the structure of the JSON returned as response from different API requests. Once filled, the dictionary can be dumped into a core object for persistence. In some cases, the need of this extra layer can be ignored, however, with the current limitation from Realm, it is an easy workaround that do not add overhead on the actual scenario;
-View: the view layer is passive - as per article on Martin Fowler’s article - it means, it doesn’t contain business rules that decide when to trigger UI changes but, instead, it does perform the action of triggering these changes. This layer is composed by Activities, Fragments, Adapters and the associate XML, .mnu, and other resource files that they bind to. All view classes passes the events derived from user’s interaction with the UI to the Presenter layer, responsible for processing the business rules that will in turn update the UI; 
-Presenter: this layer is the mean term among business rules and view layer. It can be, in some cases, the messenger that deliver UI events to be processed by business objects on model layer or, it can process them itself. In this application, the Presenter layer is responsible to execute business rules and also trigger their outcome to view layer. Network event handling, must be executed on this layer.
+ - **Model:** layer that holds classes that describe Business Objects. As an ORM (see Realm) is being used, these classes also acts as template for generating the database. Despite these core business objects, model layer also provides enums that helps controlling the application logical flow in an elegant way and dictionaries. Dictionaries are POJO classes that matches the structure of the JSON returned as response from different API requests. Once filled, the dictionary can be dumped into a core object for persistence. In some cases, the need of this extra layer can be ignored, however, with the current limitation from Realm, it is an easy workaround that do not add overhead on the actual scenario;
+ - **View:** the view layer is passive - as per article on Martin Fowler’s article - it means, it doesn’t contain business rules that decide when to trigger UI changes but, instead, it does perform the action of triggering these changes. This layer is composed by Activities, Fragments, Adapters and the associate XML, .mnu, and other resource files that they bind to. All view classes passes the events derived from user’s interaction with the UI to the Presenter layer, responsible for processing the business rules that will in turn update the UI; 
+ - **Presenter:** this layer is the mean term among business rules and view layer. It can be, in some cases, the messenger that deliver UI events to be processed by business objects on model layer or, it can process them itself. In this application, the Presenter layer is responsible to execute business rules and also trigger their outcome to view layer. Network event handling, must be executed on this layer.
 
 Below there is a sequence diagram that shows the basic configuration of model and presenter layers on a typical activity or fragment:
 
@@ -81,6 +82,21 @@ Below there is a sequence diagram that shows the basic configuration of model an
  - **Singleton**: this pattern is used mainly to offer a single instance of presenter for its respective views;
  - **Observer**: this pattern is largely used in order to emit network events that trigger database actions or UI updates. The variant employed is observed base on bus, being all call routed to a class that holds reference to all subscribers;
  - **Delegate**: this pattern is used in more than one place in the, for instance, with Postman and Router classes. The idea is to decouple classes that play distinct roles in the app - as the ones responsible for network communication for instance. That way, if any maintenance is required on them is not trigger beyond the class that gather all calls;
+
+<a name="tests" />
+## Quality Assurance
+
+<p align="center">
+  <img src="blueprints/blueprint_03.png" align="center" width=500>
+</p>
+
+One of the most importants gains that the MVP pattern brings to the project is the fact that all business logic gets isolated on Presenter Layer, it means, all code worthy to be tested is well encapsulated on classes with low dependency on OS components. This pattern alied with a Dependency Injection Container and Mock Frameworks (such as [Mockito](http://site.mockito.org/) and [PowerMockito](https://github.com/powermock/powermock/wiki/mockitousage)) allows the developer to take full advantage of Unit Tests.   
+
+Despite the good coverage - over the classes that are worthy testing - it is always a good idea to include automation tests on the project. Currently, the offical adviced automation tool is [Espresso](https://google.github.io/android-testing-support-library/docs/espresso/) that counts with a faboulous tool embbeded on Android Studio that lets the developer record automation steps while manipulation the app as an user. In order to develop this concept, the following story was created:
+
+|Test Id|Description|
+|-------|-----------|
+|S001   | As an user I should be able to:<br />  - start the application;<br /> - click on left corner menu to manually insert a character's URL;<br /> - Type the URL and hit okay;<br /> - See that the application has loaded the information correponding the typed URL on the screen;<br /> - Long press over recently added character and choose to remove it from list;<br /> - Check that the application has successfully removed the character from the list;<br />
 
 <a name="frameworks" />
 ## Frameworks
@@ -100,8 +116,9 @@ Below there is a sequence diagram that shows the basic configuration of model an
      - [**RxAndroid**](https://github.com/ReactiveX/RxAndroid): _“(...) ReactiveX is a combination of the best ideas from the Observer pattern, the Iterator pattern, and functional programming...”_
  - [**Dagger 2**](https://google.github.io/dagger/): a dependency Injector for Android and Java, used to grant one of the S.O.L.I.D. principles for OO programming (Dependency Inversion Principle). Besides allowing the high level class to not depend upon low level ones, it makes Unit Test easier to perform with the help of a mocking framework i.e. Mockito;
  - **Other**:
+     - [**Barcode Scanner**](https://github.com/dm77/barcodescanner): _"(...) Android library projects that provides easy to use and extensible Barcode Scanner views based on ZXing and ZBar..."_
      - [**Data bind**](https://developer.android.com/topic/libraries/data-binding/index.html): “(...) The Data Binding Library offers both flexibility and broad compatibility — it's a support library, so you can use it with all Android platform versions back to Android 2.1 (API level 7+)...”
-
+ 
 <a name="end-points" />
 ## End points
  - [**Star Wars API**](https://swapi.co/): _“(...) The Star Wars API, or "swapi" (Swah-pee) is the world's first quanitified and programmatically-accessible data source for all the data from the Star Wars canon universe! We've taken all the rich contextual stuff from the universe and formatted into something easier to consume with software. Then we went and stuck an API on the front so you can access it all!...”_
