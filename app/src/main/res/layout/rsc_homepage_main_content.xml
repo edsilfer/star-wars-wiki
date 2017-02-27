@@ -63,6 +63,7 @@
                 app:menu_labels_singleLine="true">
 
                 <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/search_by_qr_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{presenter::searchByQrCode}"
@@ -74,6 +75,7 @@
                     app:fab_size="mini" />
 
                 <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/search_by_url"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{presenter::searchByUrl}"

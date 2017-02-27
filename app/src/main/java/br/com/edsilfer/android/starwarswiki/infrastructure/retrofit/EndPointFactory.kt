@@ -1,5 +1,6 @@
 package br.com.edsilfer.android.starwarswiki.infrastructure.retrofit
 
+import android.content.Context
 import br.com.edsilfer.android.searchimages.communication.GCSAPIEndPoint
 import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.infrastructure.App
@@ -21,37 +22,37 @@ object EndPointFactory {
     /**
      * Returns an end point based on the input parameter
      */
-    fun getEndPoint(type: Type): Any {
+    fun getEndPoint(context: Context, type: Type): Any {
         when (type) {
-            Type.GOOGLE_CUSTOM_SEARCH_API -> return getGCSEndPoint()
-            Type.STAR_WARS_API -> return getSWAPIEndPoint()
-            Type.THE_MOVIE_DB_API -> return getTMDBEndPoint()
+            Type.GOOGLE_CUSTOM_SEARCH_API -> return getGCSEndPoint(context)
+            Type.STAR_WARS_API -> return getSWAPIEndPoint(context)
+            Type.THE_MOVIE_DB_API -> return getTMDBEndPoint(context)
         }
     }
 
-    private fun getSWAPIEndPoint(): SWAPIEndPoint {
+    private fun getSWAPIEndPoint(context: Context): SWAPIEndPoint {
         return Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(App.getContext().getString(R.string.str_communication_base_url_swapi))
+                .baseUrl(context.getString(R.string.str_communication_base_url_swapi))
                 .build()
                 .create(SWAPIEndPoint::class.java)
     }
 
-    private fun getTMDBEndPoint(): TMDBEndPoint {
+    private fun getTMDBEndPoint(context: Context): TMDBEndPoint {
         return Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(App.getContext().getString(R.string.str_communication_base_url_tmdb))
+                .baseUrl(context.getString(R.string.str_communication_base_url_tmdb))
                 .build()
                 .create(TMDBEndPoint::class.java)
     }
 
-    private fun getGCSEndPoint(): GCSAPIEndPoint {
+    private fun getGCSEndPoint(context: Context): GCSAPIEndPoint {
         return Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(App.getContext().getString(R.string.str_communication_base_url_gcs))
+                .baseUrl(context.getString(R.string.str_communication_base_url_gcs))
                 .build()
                 .create(GCSAPIEndPoint::class.java)
     }

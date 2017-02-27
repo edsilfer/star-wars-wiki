@@ -1,5 +1,7 @@
 package br.com.edsilfer.android.starwarswiki.util;
 
+import android.content.Context;
+
 import org.jetbrains.annotations.NotNull;
 
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman;
@@ -9,7 +11,7 @@ import br.com.edsilfer.android.starwarswiki.infrastructure.Postman;
  */
 public class MockedPostman extends Postman {
     @Override
-    public void searchCharacter(@NotNull String url) {
-        super.searchCharacter(url);
+    public void searchCharacter(@NotNull Context context, @NotNull String url) {
+        super.searchCharacter(context, url);
     }
 }

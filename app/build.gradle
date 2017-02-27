@@ -13,12 +13,20 @@ android {
 
     defaultConfig {
         applicationId "br.com.edsilfer.android.starwarswiki"
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled  true
+        testInstrumentationRunner "br.com.edsilfer.android.starwarswiki.infrastructure.TestRunner"
+
+    }
+
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
     }
 
     sourceSets {

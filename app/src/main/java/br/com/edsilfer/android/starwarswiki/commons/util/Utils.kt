@@ -1,6 +1,6 @@
 package br.com.edsilfer.android.starwarswiki.commons.util
 
-import br.com.edsilfer.android.starwarswiki.infrastructure.App.Companion.getContext
+import android.content.Context
 import java.util.*
 
 
@@ -13,10 +13,10 @@ object Utils {
     private const val ARG_PROPERTIES_CONFIGURATION_FILE = "config.properties"
     private val mCachedProperties = mutableMapOf<String, String>()
 
-    fun readProperty(key: String): String {
+    fun readProperty(context : Context, key: String): String {
         if (!mCachedProperties.containsKey(key)) {
             val properties = Properties()
-            val inputStream = getContext().assets.open(ARG_PROPERTIES_CONFIGURATION_FILE)
+            val inputStream = context.assets.open(ARG_PROPERTIES_CONFIGURATION_FILE)
             properties.load(inputStream);
             val value = properties.getProperty(key)
             mCachedProperties.put(key, value)

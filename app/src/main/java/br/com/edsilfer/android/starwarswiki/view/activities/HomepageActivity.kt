@@ -99,18 +99,6 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
         binding.presenter = mPresenter
     }
 
-    override fun showGetUrlPopUp() {
-        showInputDialog(
-                title = "Search Character",
-                noInputs = 1,
-                hint1 = "http://swapi.co/api/people/?",
-                onAccept = {
-                    values ->
-                    mPresenter.onUrlType(values[0])
-                }
-        )
-    }
-
     private fun initToolbar() {
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
@@ -169,6 +157,18 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
     /*
     CONTRACT IMPLEMENTATION
      */
+    override fun showGetUrlPopUp() {
+        showInputDialog(
+                title = "Search Character",
+                noInputs = 1,
+                hint1 = "http://swapi.co/api/people/?",
+                onAccept = {
+                    values ->
+                    mPresenter.onUrlType(values[0])
+                }
+        )
+    }
+
     override fun showErrorMessage(message: Int) {
         hideLoading()
         showErrorPopUp(message)
