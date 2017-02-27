@@ -39,9 +39,8 @@ import javax.inject.Inject
 
 
 /**
- * Created by ferna on 2/18/2017.
+ * View Layer for HomepageActivity
  */
-
 class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.OnNavigationItemSelectedListener {
 
     private val TAG = HomepageActivity::class.simpleName
@@ -64,7 +63,7 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
         Injector.getInstance().inject(this)
         initDataBinding()
         initToolbar()
-        loadCachedCharacter()
+        loadCachedCharacters()
     }
 
     override fun onResumeFragments() {
@@ -142,6 +141,9 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
         }
     }
 
+    /*
+    DrawerMenu delegate events
+     */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
@@ -191,7 +193,7 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
         }
     }
 
-    override fun loadCachedCharacter() {
+    override fun loadCachedCharacters() {
         runOnUiThread {
             val charactersObjects = CharacterDAO.list().toMutableList()
             characters.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

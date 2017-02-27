@@ -4,26 +4,24 @@ import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
 import android.support.annotation.IntegerRes
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.tyllt.view.contracts.BaseView
 
 
 /**
- * Created by efernandes on 29/12/16.
+ * Contains common methods for all application's activities
  */
-
 abstract class BaseActivity : AppCompatActivity(), BaseView {
+
+    private val TAG = BaseActivity::class.simpleName
 
     public override fun onStart() {
         super.onStart()
-        Log.i("DROID-001", "class ${this.javaClass.name} adding event")
         getPresenter()?.setView(this)
     }
 
     public override fun onStop() {
         super.onStop()
-        Log.i("DROID-001", "class ${this.javaClass.name} removing network event")
         getPresenter()?.dropView()
     }
 

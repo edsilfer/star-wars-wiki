@@ -23,13 +23,13 @@ import br.com.tyllt.view.contracts.BaseView
 /**
  * Created by ferna on 2/18/2017.
  */
-class FilmsFragmentPresenter(val mPostman: Postman) : FilmsFragmentPresenterContract, BasePresenter() {
+open class FilmsFragmentPresenter(val mPostman: Postman) : FilmsFragmentPresenterContract, BasePresenter() {
 
     private val TAG = FilmsFragmentPresenter::class.simpleName
 
     override fun hasEvents() = true
-    private lateinit var mContext: AppCompatActivity
-    private lateinit var mView: FilmsFragmentViewContract
+    protected lateinit var mContext: AppCompatActivity
+    protected  lateinit var mView: FilmsFragmentViewContract
 
     override fun takeView(_view: BaseView) {
         mView = _view as FilmsFragmentViewContract

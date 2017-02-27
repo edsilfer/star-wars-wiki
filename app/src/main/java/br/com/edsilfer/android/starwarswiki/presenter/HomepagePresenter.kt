@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import br.com.edsilfer.android.starwarswiki.R
-import br.com.edsilfer.android.starwarswiki.commons.Router
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchFilmsActivity
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchGitHubLink
 import br.com.edsilfer.android.starwarswiki.commons.Router.launchQRCodeScanner
@@ -31,7 +30,7 @@ import com.google.android.gms.location.LocationServices
 
 
 /**
- * Created by ferna on 2/18/2017.
+ * Presenter layer for HomepageAcitvity
  */
 open class HomepagePresenter(val mPostman: Postman) :
         HomepagePresenterContract,

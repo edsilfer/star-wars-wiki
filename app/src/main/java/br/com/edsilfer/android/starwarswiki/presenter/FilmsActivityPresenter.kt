@@ -11,13 +11,13 @@ import br.com.tyllt.view.contracts.BaseView
 
 
 /**
- * Created by ferna on 2/18/2017.
+ * Presenter layer for FilmsActivity
  */
-class FilmsActivityPresenter(val mPostman: Postman) : FilmsActivityPresenterContract, BasePresenter(), ISubscriber {
+open class FilmsActivityPresenter(val mPostman: Postman) : FilmsActivityPresenterContract, BasePresenter(), ISubscriber {
 
     override fun hasEvents() = true
-    private lateinit var mContext: AppCompatActivity
-    private lateinit var mView: FilmsActivityViewContract
+    protected lateinit var mContext: AppCompatActivity
+    protected lateinit var mView: FilmsActivityViewContract
 
     override fun takeView(_view: BaseView) {
         mView = _view as FilmsActivityViewContract

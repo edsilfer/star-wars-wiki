@@ -13,7 +13,7 @@ interface HomepageViewContract : BaseView {
     /*
     Load cached character list on recycler view
      */
-    fun loadCachedCharacter()
+    fun loadCachedCharacters()
 
     /*
     Adds character on recycler view

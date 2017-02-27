@@ -8,9 +8,8 @@ import br.com.edsilfer.android.starwarswiki.view.fragments.FilmsFragment
 import io.realm.RealmList
 
 /**
- * Created by ferna on 2/21/2017.
+ * Adapter for film details ViewPager
  */
-
 class FilmsAdapter(fragmentManager: FragmentManager, val mMovies: RealmList<Film>) : FragmentPagerAdapter(fragmentManager) {
 
     override fun getItem(position: Int): Fragment {

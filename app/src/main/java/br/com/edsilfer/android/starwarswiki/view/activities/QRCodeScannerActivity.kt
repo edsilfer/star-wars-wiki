@@ -10,9 +10,8 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 import javax.inject.Inject
 
 /**
- * Created by ferna on 2/19/2017.
+ * View layer for QR Code Scanner Activity
  */
-
 class QRCodeScannerActivity : BaseActivity(), QRCodeScannerViewContract, ZXingScannerView.ResultHandler {
 
     private val TAG = QRCodeScannerActivity::class.java.simpleName

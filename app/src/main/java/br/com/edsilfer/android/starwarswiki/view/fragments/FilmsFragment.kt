@@ -19,9 +19,24 @@ import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 /**
- * Created by ferna on 2/21/2017.
+ * View layer for FilmsFragment
  */
 class FilmsFragment : BaseFragment(), FilmsFragmentViewContract {
+
+    /**
+     * Companion objects are the equivalent to static arg/methods from Java
+     */
+    companion object {
+        private val ARG_FILM_ID = "ARG_FILM_ID"
+
+        fun newInstance(filmId: Long): FilmsFragment {
+            val fragment = FilmsFragment()
+            val args = Bundle()
+            args.putLong(ARG_FILM_ID, filmId)
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     @Inject
     lateinit var mPresenter: FilmsFragmentPresenterContract
@@ -36,30 +51,25 @@ class FilmsFragment : BaseFragment(), FilmsFragmentViewContract {
         Injector.getInstance().inject(this)
     }
 
-    companion object {
-        private val ARG_FILM_ID = "ARG_FILM_ID"
-        fun newInstance(filmId: Long): FilmsFragment {
-            val fragment = FilmsFragment()
-            val args = Bundle()
-            args.putLong(ARG_FILM_ID, filmId)
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.item_film, container, false)
+        bindUIComponents(rootView)
+        setClickeListeners()
+        return rootView
+    }
+
+    private fun bindUIComponents(rootView: View) {
         mFilm = FilmDAO.read(arguments.getLong(ARG_FILM_ID))!!
         mImage = rootView.findViewById(R.id.image) as ImageView
         mName = rootView.findViewById(R.id.name) as TextView
+    }
 
+    private fun setClickeListeners() {
         mImage.setOnClickListener {
             activity.runOnUiThread {
                 launchMovieUrl(activity as AppCompatActivity, mFilm.url)
             }
         }
-
-        return rootView
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

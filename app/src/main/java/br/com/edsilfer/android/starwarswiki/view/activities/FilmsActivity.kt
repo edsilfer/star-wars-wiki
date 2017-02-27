@@ -1,24 +1,22 @@
 package br.com.edsilfer.android.starwarswiki.view.activities
 
 import android.os.Bundle
-import android.util.Log
 import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.commons.Router.ARG_CHARACTER_ID
 import br.com.edsilfer.android.starwarswiki.infrastructure.Postman
 import br.com.edsilfer.android.starwarswiki.infrastructure.dagger.Injector
+import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.BasePresenter
 import br.com.edsilfer.android.starwarswiki.presenter.contracts.FilmsActivityPresenterContract
 import br.com.edsilfer.android.starwarswiki.view.activities.contracts.FilmsActivityViewContract
 import br.com.edsilfer.android.starwarswiki.view.adapter.FilmsAdapter
-import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 import kotlinx.android.synthetic.main.activity_film.*
 import javax.inject.Inject
 
 
 /**
- * Created by ferna on 2/18/2017.
+ * View layer for FilmsActivity
  */
-
 class FilmsActivity : BaseActivity(), FilmsActivityViewContract {
 
     private val TAG = FilmsActivity::class.simpleName
@@ -38,18 +36,21 @@ class FilmsActivity : BaseActivity(), FilmsActivityViewContract {
         setContentView(R.layout.activity_film)
         Injector.getInstance().inject(this)
         initToolbar()
-        retrieveUrls()
+        retrieveCharacter()
         initViewPager()
-
-        latitude.text = "lat: ${mCharacter.latitude}"
-        longitude.text = "lon: ${mCharacter.longitude}"
+        setLatLonLabels()
     }
 
-    private fun retrieveUrls() {
+    private fun setLatLonLabels() {
+        latitude.text = getString(R.string.str_commons_latitude, mCharacter.latitude)
+        longitude.text = getString(R.string.str_commons_longitude, mCharacter.longitude)
+    }
+
+    private fun retrieveCharacter() {
         try {
             mCharacter = CharacterDAO.read(intent.extras.getLong(ARG_CHARACTER_ID))!!
         } catch (e: Exception) {
-            throw IllegalArgumentException("FilmsActivity requests a Character object")
+            throw IllegalArgumentException(getString(R.string.str_error_invalid_character_object))
         }
     }
 

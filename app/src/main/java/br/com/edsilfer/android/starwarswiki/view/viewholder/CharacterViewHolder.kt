@@ -8,7 +8,7 @@ import android.widget.TextView
 import br.com.edsilfer.android.starwarswiki.R
 
 /**
- * Created by ferna on 2/19/2017.
+ * View Holder for a CharacterObject
  */
 class CharacterViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView) {
     val wrapper = rootView.findViewById(R.id.wrapper) as RelativeLayout
