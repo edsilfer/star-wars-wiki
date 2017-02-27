@@ -1,7 +1,7 @@
 <a name="summary">
 # Summary
-1. [Overview](#overview) 
-   * [Goal](#goal) 
+1. [Introduction](#introduction) 
+   * [Goal](#overview) 
    * [Requirements](#requirements) 
    * [Showcase](#showcase) 
    * [QR Code Samples](#qrcode-examples) 
@@ -13,10 +13,10 @@
 4. [License](#license)
 
 
+<a name="introduction" />
+# Introduction
 <a name="overview" />
-# Overview
-<a name="goal" />
-## Goal
+## Overview
 Create an application capable to read urls from Star Wars API, displaying these information in an application of type master-details. The requirements raised for this assignment shall test concepts of:
  1. Architectural design for Android Applications;
  2. Ability to communicate with complex end-points, parsing JSON responses and update UI;
@@ -26,16 +26,53 @@ Create an application capable to read urls from Star Wars API, displaying these 
  6. other.
 
 <a name="requirements" />
-## Requirements
-
-|   #  |Requirement                            |Description                                                                                                                                                                                                                           |	Done? |	 
-|------|---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|	-----	| 
-|REQ001|Read QR Code                           | Application must be able to read an URL from a QR Code image, storing the collected data locally		 |done
-|REQ002|Display character list                 | Display to the user a list with all read characters containing, at least, character’s name and URL		|done
-|REQ003|Display user details                   | When click on a list item, application must display character’s details including a list of movies that that character was part of. Among the details, show: User’s geolocation at the time when that QR Code was read; Film’s poster;		| done
-|REQ004|Collect user’s geolocation             | Store user’s geolocation on local database at the moment that the QR Code is read		|done
-|REQ005|Allow user to navigate to film website | When user taps on movie’s poster, application must redirect the user to film’s website		| done
-|REQ006|Allow information caching              | All information once loaded from web into app must be persisted locally and accessible offline | done
+<table>
+  <tr>
+    <td colspan="4" align="center"><b>Requirements</b></td>
+  </tr>
+  <tr>
+  <td align="center"><b>ID</b></td>
+  <td align="center"><b>Name</b></td>
+  <td align="center"><b>Description</b></td>
+  <td align="center"><b>Story Points</b></td>
+  </tr>
+  <tr>
+    <td>REQ001</td>
+    <td align="justify">Read QR Code</td>
+    <td align="justify">Application must be able to read an URL from a QR Code image, storing the collected data locally</td>
+    <td align="center">8</td>
+  </tr>
+  <tr>
+    <td>REQ002</td>
+    <td align="justify">Display character list</td>
+    <td align="justify">Display to the user a list with all read characters containing, at least, character’s name and URL</td>
+    <td align="center">3</td>
+  </tr>
+  <tr>
+    <td>REQ003</td>
+    <td align="justify">Display user details</td>
+    <td align="justify">When click on a list item, application must display character’s details including a list of movies that that character was part of. Among the details, show: User’s geolocation at the time when that QR Code was read; Film’s poster;</td>
+    <td align="center">5</td>
+  </tr>
+  <tr>
+    <td>REQ004</td>
+    <td align="justify">Collect user’s geolocation</td>
+    <td align="justify">Store user’s geolocation on local database at the moment that the QR Code is read</td>
+    <td align="center">2</td>
+  </tr>
+  <tr>
+    <td>REQ005</td>
+    <td align="justify">Allow user to navigate to film website</td>
+    <td align="justify">When user taps on movie’s poster, application must redirect the user to film’s website</td>
+    <td align="center">1</td>
+  </tr>
+   <tr>
+    <td>REQ006</td>
+    <td align="justify">Allow information caching</td>
+    <td align="justify">All information once loaded from web into app must be persisted locally and accessible offline</td>
+    <td align="center">5</td>
+  </tr>
+</table>
 
 <a name="showcase" />
 ## Showcase
@@ -61,7 +98,7 @@ Create an application capable to read urls from Star Wars API, displaying these 
   <b>Figure 01:</b> sample qr codes generated on: http://br.qr-code-generator.com/ 
 </p>
 
-_Individual image can be found [here](https://github.com/edsilfer/star-wars-wiki/tree/master/qrcodes)_
+_Individual images can be found [here](https://github.com/edsilfer/star-wars-wiki/tree/master/qrcodes)_
 
 <a name="architecture" />
 # Architecture
