@@ -1,8 +1,7 @@
 package br.com.edsilfer.android.starwarswiki.commons.util
 
-import java.util.*
-import android.content.res.AssetManager
 import br.com.edsilfer.android.starwarswiki.infrastructure.App.Companion.getContext
+import java.util.*
 
 
 /**

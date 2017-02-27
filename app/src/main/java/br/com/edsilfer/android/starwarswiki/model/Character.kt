@@ -5,7 +5,6 @@ import br.com.edsilfer.android.starwarswiki.model.dictionary.CharacterDictionary
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmList
 import io.realm.RealmObject
-import io.realm.annotations.Ignore
 import io.realm.annotations.PrimaryKey
 import org.json.JSONArray
 import org.json.JSONObject

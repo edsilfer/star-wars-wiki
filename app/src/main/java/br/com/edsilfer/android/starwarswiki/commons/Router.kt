@@ -5,12 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import br.com.edsilfer.android.starwarswiki.R
-import br.com.edsilfer.android.starwarswiki.infrastructure.App.Companion.getContext
 import br.com.edsilfer.android.starwarswiki.view.activities.FilmsActivity
 import br.com.edsilfer.android.starwarswiki.view.activities.HomepageActivity
 import br.com.edsilfer.android.starwarswiki.view.activities.QRCodeScannerActivity
-import br.com.edsilfer.kotlin_support.extensions.showErrorPopUp
-import java.util.*
 
 
 /**

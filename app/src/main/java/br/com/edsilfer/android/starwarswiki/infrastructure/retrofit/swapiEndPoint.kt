@@ -3,7 +3,6 @@ package br.com.edsilfer.android.starwarswiki.infrastructure.retrofit
 import br.com.edsilfer.android.starwarswiki.model.dictionary.CharacterDictionary
 import br.com.edsilfer.android.starwarswiki.model.dictionary.MovieDictionary
 import io.reactivex.Observable
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Url
 

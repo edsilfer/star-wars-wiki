@@ -2,7 +2,6 @@ package br.com.edsilfer.android.starwarswiki.presenter.contracts
 
 import android.view.View
 import br.com.edsilfer.android.starwarswiki.model.Character
-import br.com.edsilfer.android.starwarswiki.infrastructure.database.CharacterDAO
 
 /**
  * Created by ferna on 2/18/2017.
