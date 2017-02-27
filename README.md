@@ -94,9 +94,19 @@ One of the most importants gains that the MVP pattern brings to the project is t
 
 Despite the good coverage - over the classes that are worthy testing - it is always a good idea to include automation tests on the project. Currently, the offical adviced automation tool is [Espresso](https://google.github.io/android-testing-support-library/docs/espresso/) that counts with a faboulous tool embbeded on Android Studio that lets the developer record automation steps while manipulation the app as an user. In order to develop this concept, the following story was created:
 
-|Test Id|Description|
-|-------|-----------|
-|S001   | As an user I should be able to:<br />  - start the application;<br /> - click on left corner menu to manually insert a character's URL;<br /> - Type the URL and hit okay;<br /> - See that the application has loaded the information correponding the typed URL on the screen;<br /> - Long press over recently added character and choose to remove it from list;<br /> - Check that the application has successfully removed the character from the list;<br />
+<table>
+  <tr>
+    <td colspan="2" align="center"><b>Test Scenarios</b></td>
+  </tr>
+  <tr>
+  <td align="center"><b>ID</b></td>
+  <td align="center"><b>Description</b></td>
+  </tr>
+  <tr>
+    <td>S001</td>
+    <td align="justify">As an user I should be able to:<br />  - start the application;<br /> - click on left corner menu to manually insert a character's URL;<br /> - Type the URL and hit okay;<br /> - See that the application has loaded the information correponding the typed URL on the screen;<br /> - Long press over recently added character and choose to remove it from list;<br /> - Check that the application has successfully removed the character from the list;<br /></td>
+  </tr>
+</table>
 
 <a name="frameworks" />
 ## Frameworks
