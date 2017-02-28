@@ -101,7 +101,7 @@ open class HomepagePresenter(val mPostman: Postman) :
         Log.i(TAG, "Read QR Code content is $url.")
         mView.showLoading()
         mView.dismissSoftKeyboard()
-        mPostman.searchCharacter(url)
+        mPostman.searchCharacter(mContext, url)
     }
 
     override fun onPermissionsGranted() {

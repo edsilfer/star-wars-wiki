@@ -121,7 +121,7 @@ public class TestHomepagePresenter {
         mPresenter.onQRCodeRead(url);
         verify(mMockedView).showLoading();
         verify(mMockedView).dismissSoftKeyboard();
-        verify(mMockedPostman).searchCharacter(url);
+        verify(mMockedPostman).searchCharacter(mMockedContext, url);
 
     }
 
@@ -131,7 +131,7 @@ public class TestHomepagePresenter {
         mPresenter.onUrlType(url);
         verify(mMockedView).showLoading();
         verify(mMockedView).dismissSoftKeyboard();
-        verify(mMockedPostman).searchCharacter(url);
+        verify(mMockedPostman).searchCharacter(mMockedContext, url);
     }
 
     @Test
