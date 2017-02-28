@@ -28,16 +28,19 @@ import br.com.edsilfer.android.starwarswiki.infrastructure.TestApplication;
 import br.com.edsilfer.android.starwarswiki.view.viewholder.CharacterViewHolder;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.longClick;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.intent.Checks.checkNotNull;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -66,18 +69,29 @@ public class AutomationTestStory001 {
         toggleFABMenuState();
         ConditionWatcher.waitForCondition(new WaitLoadingDialog());
         onView(withId(R.id.characters)).check(matches(atPosition(0, withText("Luke Skywalker"))));
-        sleep(500);
+        showMoviePosters();
+        sleep(1000);
         showCharacterOptions();
-        sleep(500);
+        sleep(1000);
         deleteCharacter();
     }
 
-    private void openSearchCharacterByUrl() {
+    /*
+    FIXME: TEST HANGING WHEN FILM ACTIVITY GETS OPEN
+     */
+    private void showMoviePosters() throws InterruptedException {
+       /* onView(allOf(withId(R.id.characters), isDisplayed())).perform(actionOnItemAtPosition(0, click()));
+        pressBack();*/
+    }
+
+    private void openSearchCharacterByUrl() throws InterruptedException {
         ViewInteraction floatingActionButton = onView(
                 allOf(withClassName(is("com.github.clans.fab.FloatingActionButton")),
                         withParent(withId(R.id.fab_menu)),
                         isDisplayed()));
         floatingActionButton.perform(click());
+
+        sleep(1000);
 
         ViewInteraction floatingActionButton2 = onView(
                 allOf(withId(R.id.search_by_url),
@@ -100,7 +114,7 @@ public class AutomationTestStory001 {
     private void typeCharacterURL() throws InterruptedException {
         onView(allOf(withId(R.id.input1), isDisplayed())).perform(click());
         onView(allOf(withId(R.id.input1), isDisplayed())).perform(replaceText("http://swapi.co/api/people/1"), closeSoftKeyboard());
-        sleep(500);
+        sleep(1000);
         onView(allOf(withId(R.id.okay), isDisplayed())).perform(click());
     }
 
