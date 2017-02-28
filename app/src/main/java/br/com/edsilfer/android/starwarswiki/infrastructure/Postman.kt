@@ -1,9 +1,9 @@
 package br.com.edsilfer.android.starwarswiki.infrastructure
 
+import android.content.Context
 import br.com.edsilfer.android.searchimages.communication.GCSAPIEndPoint
 import br.com.edsilfer.android.starwarswiki.R
 import br.com.edsilfer.android.starwarswiki.commons.util.Utils.readProperty
-import br.com.edsilfer.android.starwarswiki.infrastructure.App.Companion.getContext
 import br.com.edsilfer.android.starwarswiki.infrastructure.retrofit.EndPointFactory
 import br.com.edsilfer.android.starwarswiki.infrastructure.retrofit.SWAPIEndPoint
 import br.com.edsilfer.android.starwarswiki.infrastructure.retrofit.TMDBEndPoint
@@ -35,9 +35,9 @@ open class Postman {
 
     private val ARG_GSC_FILE_TYPE = "jpg"
 
-    open fun searchCharacter(url: String) {
+    open fun searchCharacter(context: Context, url: String) {
         var result: Character? = null
-        (EndPointFactory.getEndPoint(EndPointFactory.Type.STAR_WARS_API) as SWAPIEndPoint)
+        (EndPointFactory.getEndPoint(context, EndPointFactory.Type.STAR_WARS_API) as SWAPIEndPoint)
                 .readPerson(url)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -46,7 +46,7 @@ open class Postman {
                         result = Character.parseDictionary(character)
                         var count = 0
                         for (filmUrl in character.films) {
-                            searchMovieInfo(result!!, filmUrl, count++ == character.films.size - 1)
+                            searchMovieInfo(context, result!!, filmUrl, count++ == character.films.size - 1)
                         }
                     }
 
@@ -56,13 +56,13 @@ open class Postman {
                 })
     }
 
-    private fun searchCharacterImage(result: Character) {
-        (EndPointFactory.getEndPoint(EndPointFactory.Type.GOOGLE_CUSTOM_SEARCH_API) as GCSAPIEndPoint)
+    private fun searchCharacterImage(context: Context, result: Character) {
+        (EndPointFactory.getEndPoint(context, EndPointFactory.Type.GOOGLE_CUSTOM_SEARCH_API) as GCSAPIEndPoint)
                 .searchImage(
                         "star wars ${result.name}",
-                        readProperty(ARG_GCS_APPLICATION_KEY),
+                        readProperty(context, ARG_GCS_APPLICATION_KEY),
                         ARG_GSC_FILE_TYPE,
-                        readProperty(ARG_GCS_API_KEY)
+                        readProperty(context, ARG_GCS_API_KEY)
                 )
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -83,8 +83,8 @@ open class Postman {
                 })
     }
 
-    private fun searchMovieInfo(result: Character, url: String, isLastRequest: Boolean) {
-        (EndPointFactory.getEndPoint(EndPointFactory.Type.STAR_WARS_API) as SWAPIEndPoint)
+    private fun searchMovieInfo(context: Context, result: Character, url: String, isLastRequest: Boolean) {
+        (EndPointFactory.getEndPoint(context, EndPointFactory.Type.STAR_WARS_API) as SWAPIEndPoint)
                 .readMovie(url)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -94,14 +94,14 @@ open class Postman {
                      */
 
                     override fun onSuccess(response: MovieDictionary) {
-                        searchMoviePoster(result, response.title, isLastRequest)
+                        searchMoviePoster(context, result, response.title, isLastRequest)
                     }
                 })
     }
 
-    private fun searchMoviePoster(result: Character, title: String, isLastRequest: Boolean) {
-        (EndPointFactory.getEndPoint(EndPointFactory.Type.THE_MOVIE_DB_API) as TMDBEndPoint)
-                .searchMovies(readProperty(ARG_TMDB_API_KEY), title)
+    private fun searchMoviePoster(context: Context, result: Character, title: String, isLastRequest: Boolean) {
+        (EndPointFactory.getEndPoint(context, EndPointFactory.Type.THE_MOVIE_DB_API) as TMDBEndPoint)
+                .searchMovies(readProperty(context, ARG_TMDB_API_KEY), title)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SimpleObserver<TMDBWrapperResponseDictionary>() {
@@ -111,7 +111,7 @@ open class Postman {
 
                     override fun onSuccess(response: TMDBWrapperResponseDictionary) {
                         for (m in response.results) {
-                            val posterUrl = getContext().getString(R.string.str_communication_film_poster_url, m.backdrop_path)
+                            val posterUrl = context.getString(R.string.str_communication_film_poster_url, m.backdrop_path)
                             result.films.add(Film(m.id, posterUrl, m.title))
                             break
                         }
@@ -119,7 +119,7 @@ open class Postman {
 
                     override fun onComplete() {
                         if (isLastRequest) {
-                            searchCharacterImage(result)
+                            searchCharacterImage(context, result)
                         }
                     }
                 })

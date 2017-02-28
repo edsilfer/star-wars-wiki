@@ -8,6 +8,7 @@
     android:fitsSystemWindows="true">
 
     <ImageView
+        android:id="@+id/splash_logo"
         android:layout_width="200dip"
         android:layout_height="200dip"
         android:layout_centerInParent="true"
