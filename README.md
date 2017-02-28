@@ -144,6 +144,11 @@ Despite the good coverage - over the classes that are worthy testing - it is alw
     <td align="justify">As an user I should be able to:<br />  - start the application;<br /> - click on left corner menu to manually insert a character's URL;<br /> - Type the URL and hit okay;<br /> - See that the application has loaded the information correponding the typed URL on the screen;<br /> - Long press over recently added character and choose to remove it from list;<br /> - Check that the application has successfully removed the character from the list;<br /></td>
   </tr>
 </table>
+<br />
+<p align="center">
+  <img src="showcase/showcase_10.gif" align="center"><br /><br />
+    <b>Figure 02:</b> sample automation test generated using Espresso
+ </p>
 
 <a name="frameworks" />
 ## Frameworks
