@@ -22,8 +22,6 @@ class WidgetProvider : AppWidgetProvider() {
             rootView.setTextViewText(R.id.header, "Luke Skywalker")
             Picasso.with(context)
                     .load("http://im.ziffdavisinternational.com/ign_br/screenshot/default/lukeskywalkerlightsaber_x3zw.jpg")
-                    .fit()
-                    .centerCrop()
                     .into(rootView, R.id.thumbnail, intArrayOf(id))
         }
     }
