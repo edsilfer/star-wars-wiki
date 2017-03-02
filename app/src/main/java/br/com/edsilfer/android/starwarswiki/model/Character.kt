@@ -65,6 +65,7 @@ open class Character : RealmObject() {
     open var films_urls: RealmList<RealmString> = RealmList()
     open var latitude: String = ""
     open var longitude: String = ""
+    open var creation_date = Date()
 
 
     override fun toString(): String {

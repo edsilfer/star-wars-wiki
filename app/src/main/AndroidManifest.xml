@@ -18,13 +18,13 @@
         android:theme="@style/AppTheme"
         tools:replace="android:name">
 
-        <receiver android:name=".presenter.WidgetProvider">
+        <receiver android:name=".presenter.WidgetPresenter">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/sww_widget_info" />
+                android:resource="@xml/widget_info" />
         </receiver>
 
         <activity
