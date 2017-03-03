@@ -12,7 +12,7 @@ interface HomepagePresenterContract {
 
     fun searchByUrl(view: View)
 
-    fun onQRCodeRead(url: String)
+    fun processUrl(url: String)
 
     fun onPermissionsGranted()
 

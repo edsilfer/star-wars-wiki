@@ -83,7 +83,7 @@ class HomepageActivity : BaseActivity(), HomepageViewContract, NavigationView.On
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK && data != null) {
             when (requestCode) {
-                REQUEST_QRCODE_READER -> mPresenter.onQRCodeRead(data.getStringExtra(ARG_RESULT_URL))
+                REQUEST_QRCODE_READER -> mPresenter.processUrl(data.getStringExtra(ARG_RESULT_URL))
             }
         }
     }

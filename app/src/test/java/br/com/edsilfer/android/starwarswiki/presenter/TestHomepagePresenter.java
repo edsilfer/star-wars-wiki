@@ -118,7 +118,7 @@ public class TestHomepagePresenter {
     @Test
     public void testOnQRCodeRead() {
         String url = "url";
-        mPresenter.onQRCodeRead(url);
+        mPresenter.processUrl(url);
         verify(mMockedView).showLoading();
         verify(mMockedView).dismissSoftKeyboard();
         verify(mMockedPostman).searchCharacter(mMockedContext, url);

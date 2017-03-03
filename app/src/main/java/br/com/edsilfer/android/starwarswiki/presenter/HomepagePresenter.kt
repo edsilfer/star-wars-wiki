@@ -27,6 +27,7 @@ import br.com.tyllt.view.contracts.BaseView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationServices
+import java.util.regex.Pattern
 
 
 /**
@@ -41,6 +42,7 @@ open class HomepagePresenter(val mPostman: Postman) :
 
     companion object {
         val REQUEST_PERMISSION_CAMERA = 98
+        val mUrlPattern = Pattern.compile("(http://swapi.co/api/people/)\\d+(/)|(http://swapi.co/api/people/)\\d+|(http://www.swapi.co/api/people/)\\d+")
     }
 
     private val TAG = HomepagePresenter::class.simpleName
@@ -94,14 +96,18 @@ open class HomepagePresenter(val mPostman: Postman) :
     }
 
     override fun onUrlType(url: String) {
-        onQRCodeRead(url)
+        processUrl(url)
     }
 
-    override fun onQRCodeRead(url: String) {
+    override fun processUrl(url: String) {
         Log.i(TAG, "Read QR Code content is $url.")
-        mView.showLoading()
-        mView.dismissSoftKeyboard()
-        mPostman.searchCharacter(mContext, url)
+        if (validateUrl(url)) {
+            mView.showLoading()
+            mView.dismissSoftKeyboard()
+            mPostman.searchCharacter(mContext, url)
+        } else {
+            mView.showErrorMessage(R.string.str_error_invalid_url)
+        }
     }
 
     override fun onPermissionsGranted() {
@@ -123,6 +129,10 @@ open class HomepagePresenter(val mPostman: Postman) :
     override fun deleteCharacter(character: Character) {
         CharacterDAO.delete(character.id)
         mView.removeCharacter(character)
+    }
+
+    private fun validateUrl (url : String) : Boolean {
+        return mUrlPattern.matcher(url).matches()
     }
 
     /*

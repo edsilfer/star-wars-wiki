@@ -28,6 +28,7 @@
     <string name="str_error_no_film_url">No url was found for the given movie</string>
     <string name="str_error_already_already_exists">This character is already present on your library.</string>
     <string name="str_error_invalid_character_object">FilmsActivity requests a Character object</string>
+    <string name="str_error_invalid_url">We\'re sorry but inputted URL doesn\'t match the expected pattern: \"http://www.swapi.co/api/character_id\"</string>
 
 
     <!-- *************************************************************************************** -->
