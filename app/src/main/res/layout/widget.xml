@@ -33,6 +33,10 @@
         android:layout_below="@+id/thumbnail"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
         android:orientation="vertical">
 
         <TextView
