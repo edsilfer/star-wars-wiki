@@ -1,0 +1,60 @@
+<resources>
+    <!-- *************************************************************************************** -->
+    <!-- COMMONS -->
+    <!-- *************************************************************************************** -->
+    <string name="app_name">Enciclopédia Guerra nas Estrelas</string>
+    <string name="str_commons_utils_empty_collection">Você ainda não tem %s …</string>
+    <string name="str_commons_util_loading">Carregando…</string>
+    <string name="str_commons_characters_requests">PERSONGENS</string>
+    <string name="str_commons_token_loading">Carregando…</string>
+    <string name="str_commons_latitude">lat: %s</string>
+    <string name="str_commons_longitude">lon: %s</string>
+
+    <!-- AUTHOR INFORMATION -->
+    <string name="str_author_name">Edgar S Fernandes</string>
+    <string name="str_author_linkedin">http://linkedin.com/edsilfer</string>
+    <string name="str_author_github_repository">https://github.com/edsilfer/star-wars-wiki</string>
+
+    <!-- NETWORK COMMUNICATION-->
+    <string name="str_communication_base_url_swapi">http://swapi.co/api/</string>
+    <string name="str_communication_base_url_tmdb">http://api.themoviedb.org/3/</string>
+    <string name="str_communication_base_url_gcs">https://www.googleapis.com/customsearch/</string>
+    <string name="str_communication_film_poster_url">http://image.tmdb.org/t/p/original/%s</string>
+
+    <!-- *************************************************************************************** -->
+    <!-- ERRORS -->
+    <!-- *************************************************************************************** -->
+    <string name="str_error_001">Nos desculpe mas o código QR informado não é operacional!</string>
+    <string name="str_error_no_film_url">Nenhuma URL foi encontrada para o filme fornecido</string>
+    <string name="str_error_already_already_exists">Esse personagem já está presente na sua biblioteca.</string>
+    <string name="str_error_invalid_character_object">FilmsActivity requer um objecto do tipo Character</string>
+
+
+    <!-- *************************************************************************************** -->
+    <!-- MENU -->
+    <!-- *************************************************************************************** -->
+    <string name="mnu_homepage_section_label">Opções</string>
+    <string name="mnu_homepage_rate">Dê uma estrela no GitHub!</string>
+    <string name="mnu_homepage_report_bug">Reportar um erro</string>
+    <string name="mnu_homepage_about">Sobre</string>
+    <string name="mnu_homepage_exit">Sair</string>
+
+    <!-- DRAWER -->
+    <string name="action_settings">Configurações</string>
+    <string name="navigation_drawer_open">Abrir a gaveta de navegação</string>
+    <string name="navigation_drawer_close">Fechar a gaveta de nevegação</string>
+
+    <!-- *************************************************************************************** -->
+    <!-- DIALOGS -->
+    <!-- *************************************************************************************** -->
+    <!-- CHARACTERS -->
+    <string name="str_characters_dialog_title">Opções do personagem</string>
+
+    <!-- *************************************************************************************** -->
+    <!-- WIDGET -->
+    <!-- *************************************************************************************** -->
+    <string name="str_widget_last_added_character">Ùltimo personagem adicionado…</string>
+    <string name="str_widget_empty_character_header">ah não! ;[</string>
+    <string name="str_widget_empty_character_subheader">você ainda não tem nenhum personagem adicionado</string>
+    <string name="str_widget_empty_character_thumbnail">http://images.wikia.com/doblaje/es/images/f/f7/Darth_Vader.png</string>
+</resources>
