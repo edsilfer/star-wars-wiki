@@ -49,4 +49,12 @@
     <!-- *************************************************************************************** -->
     <!-- CHARACTERS -->
     <string name="str_characters_dialog_title">Character Options</string>
+
+    <!-- *************************************************************************************** -->
+    <!-- WIDGET -->
+    <!-- *************************************************************************************** -->
+    <string name="str_widget_last_added_character">last added character…</string>
+    <string name="str_widget_empty_character_header">oh no! ;[</string>
+    <string name="str_widget_empty_character_subheader">you haven\'t added a character yet</string>
+    <string name="str_widget_empty_character_thumbnail">http://images.wikia.com/doblaje/es/images/f/f7/Darth_Vader.png</string>
 </resources>
