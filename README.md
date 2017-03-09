@@ -11,7 +11,8 @@ Supported languages:  <img src="showcase/brazilian_flag.png" width=20> <img src=
    * [Design Patterns](#design-patterns) 
    * [Quality Assurance](#tests) 
    * [Frameworks](#frameworks) 
-   * [End Points](#end-points) 
+   * [End Points](#end-points)
+3. [Application Setup](#setup)   
 4. [License](#license)
 
 
@@ -204,7 +205,31 @@ Despite the good coverage - over the classes that are worthy testing - it is alw
 ## End points
  - [**Star Wars API**](https://swapi.co/): _“(...) The Star Wars API, or "swapi" (Swah-pee) is the world's first quanitified and programmatically-accessible data source for all the data from the Star Wars canon universe! We've taken all the rich contextual stuff from the universe and formatted into something easier to consume with software. Then we went and stuck an API on the front so you can access it all!...”_
  - [**Google Custom Search**](https://developers.google.com/custom-search/): _“(...) Google Custom Search enables you to create a search engine for your website, your blog, or a collection of websites. You can configure your engine to search both web pages and images. You can fine-tune the ranking, add your own promotions and customize the look and feel of the search results. You can monetize the search by connecting your engine to your Google AdSense account…”_
+ <a name="tmdb" />
  - [**The Movie DB**](https://www.themoviedb.org/): _“(...) The Movie Database (TMDb) is a community built movie and TV database. Every piece of data has been added by our amazing community dating back to 2008. TMDb's strong international focus and breadth of data is largely unmatched and something we're incredibly proud of. Put simply, we live and breath community and that's precisely what makes us different…”_
+
+<a name="setup" />
+# Application Setup
+This application relies on three different [end points](#end-points) plus on Google Services in order to fufill the requirements. These APIs require some sort of authentication in order to allow requests. These ids are tied to develepor's account on the reffered platforms. In order to make this application work, follow the steps below:
+
+1. Clone the repository to your local machine;
+2. Create an account on Firebase Console and download Google Play Service configuration file - named ```google-services.json``` - placing it on ```~/app```. This is need in order to capture user's location and to send crash report to Firebase;
+3. Create an account on [The Moview DB](#tmdb) and acquire an API key;
+4. Go into Google Custom Search console and activate the API key for using this service;
+5. Create a file named ```config.properties```with the content below and add it on ```~/app/src/main/assets```;
+
+```properties
+gcs.application.key=*****
+gcs.api.key=*****
+tmdb.api.key=*****
+```
+
+After that application must be set to work properly. In case ```config.properties```is not present or wrongly configured, application might freeze on loading dialog that shows after reading an URL and throw the followinf stacktrace:
+
+```log
+java.lang.IllegalStateException: Fatal Exception thrown on Scheduler. at io.reactivex.android.schedulers.HandlerScheduler$ScheduledRunnable.run(HandlerScheduler.java:111)
+```
+
 
 <a name="license" />
 ## License
