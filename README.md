@@ -2,7 +2,7 @@ Supported languages:  <img src="showcase/brazilian_flag.png" width=20> <img src=
 
 # Summary
 1. [Introduction](#introduction) 
-   * [Goal](#overview) 
+   * [Overview](#overview) 
    * [Requirements](#requirements) 
    * [Showcase](#showcase) 
    * [QR Code Samples](#qrcode-examples) 
@@ -216,6 +216,7 @@ Despite the good coverage - over the classes that are worthy testing - it is alw
  - [**Star Wars API**](https://swapi.co/): _“(...) The Star Wars API, or "swapi" (Swah-pee) is the world's first quanitified and programmatically-accessible data source for all the data from the Star Wars canon universe! We've taken all the rich contextual stuff from the universe and formatted into something easier to consume with software. Then we went and stuck an API on the front so you can access it all!...”_
  - [**Google Custom Search**](https://developers.google.com/custom-search/): _“(...) Google Custom Search enables you to create a search engine for your website, your blog, or a collection of websites. You can configure your engine to search both web pages and images. You can fine-tune the ranking, add your own promotions and customize the look and feel of the search results. You can monetize the search by connecting your engine to your Google AdSense account…”_
  <a name="tmdb" />
+ 
  - [**The Movie DB**](https://www.themoviedb.org/): _“(...) The Movie Database (TMDb) is a community built movie and TV database. Every piece of data has been added by our amazing community dating back to 2008. TMDb's strong international focus and breadth of data is largely unmatched and something we're incredibly proud of. Put simply, we live and breath community and that's precisely what makes us different…”_
 
 <a name="setup" />
