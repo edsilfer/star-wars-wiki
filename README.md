@@ -1,6 +1,5 @@
 Supported languages:  <img src="showcase/brazilian_flag.png" width=20> <img src="showcase/uk_flag.png" width=20>
 
-<a name="summary">
 # Summary
 1. [Introduction](#introduction) 
    * [Goal](#overview) 
