@@ -1,9 +1,8 @@
 Supported languages:  <img src="showcase/brazilian_flag.png" width=20> <img src="showcase/uk_flag.png" width=20>
 
-<a name="summary">
 # Summary
 1. [Introduction](#introduction) 
-   * [Goal](#overview) 
+   * [Overview](#overview) 
    * [Requirements](#requirements) 
    * [Showcase](#showcase) 
    * [QR Code Samples](#qrcode-examples) 
@@ -17,8 +16,11 @@ Supported languages:  <img src="showcase/brazilian_flag.png" width=20> <img src=
 
 
 <a name="introduction" />
+
 # Introduction
+
 <a name="overview" />
+
 ## Overview
 Create an application capable to read urls from Star Wars API, displaying these information in an application of type master-details. The requirements raised for this assignment shall test concepts of:
  1. Architectural design for Android Applications;
@@ -29,6 +31,7 @@ Create an application capable to read urls from Star Wars API, displaying these 
  6. other.
 
 <a name="requirements" />
+
 <table>
   <tr>
     <td colspan="4" align="center"><b>Requirements</b></td>
@@ -102,6 +105,7 @@ Create an application capable to read urls from Star Wars API, displaying these 
 </table>
 
 <a name="showcase" />
+
 ## Showcase
 
 <p align="center">
@@ -118,6 +122,7 @@ Create an application capable to read urls from Star Wars API, displaying these 
 </p>
 
 <a name="qrcode-examples" />
+
 ## QR Code Samples
 
 <p align="center">
@@ -130,6 +135,7 @@ Create an application capable to read urls from Star Wars API, displaying these 
 _Individual images can be found [here](https://github.com/edsilfer/star-wars-wiki/tree/master/qrcodes)_
 
 <a name="architecture" />
+
 # Architecture
 The application follows Model-View-Presenter (MVP) pattern:
  - **Model:** layer that holds classes that describe Business Objects. As an ORM (see Realm) is being used, these classes also acts as template for generating the database. Despite these core business objects, model layer also provides enums that helps controlling the application logical flow in an elegant way and dictionaries. Dictionaries are POJO classes that matches the structure of the JSON returned as response from different API requests. Once filled, the dictionary can be dumped into a core object for persistence. In some cases, the need of this extra layer can be ignored, however, with the current limitation from Realm, it is an easy workaround that do not add overhead on the actual scenario;
@@ -144,6 +150,7 @@ Below there is a sequence diagram that shows the basic configuration of view and
 
 
 <a name="design-patterns" />
+
 ## Design Patterns
  - **Singleton**: this pattern is used mainly to offer a single instance of presenters for their respective views. Its implementation happens thanks to Dagger2 @Singleton annotation;
  - **Observer**: this pattern is largely used in order to issue network events that trigger database actions or UI updates. The variant employed is observed based on bus, being all call routed to a class that holds reference to all subscribers. The implementation of this pattern is owned by the author of this application and encapsulated on [Android Kotlin Support Library](https://github.com/edsilfer/android-kotlin-support);
@@ -151,6 +158,7 @@ Below there is a sequence diagram that shows the basic configuration of view and
  - **Factory**: the application uses Factory Pattern on default Dagger2 implementation as well as to acquire End Points references for instance;
 
 <a name="tests" />
+
 ## Quality Assurance
 
 <p align="center">
@@ -181,6 +189,7 @@ Despite the good coverage - over the classes that are worthy testing - it is alw
  </p>
 
 <a name="frameworks" />
+
 ## Frameworks
  - [**Kotlin**](https://kotlinlang.org/): Kotlin is free to use and owned by Jet Brains. It adds a lot of cool features, boosting your productiveness while keeping everythying 100% compatible with Java;
  - [**Realm Mobile Database**](https://realm.io/products/realm-mobile-database/): _“(...) Realm Mobile Database is an alternative to SQLite and Core Data. Thanks to its zero-copy design, Realm Mobile Database is much faster than an ORM, and often faster than raw SQLite. Get started in minutes, not hours…”_
@@ -202,13 +211,16 @@ Despite the good coverage - over the classes that are worthy testing - it is alw
      - [**Data bind**](https://developer.android.com/topic/libraries/data-binding/index.html): “(...) The Data Binding Library offers both flexibility and broad compatibility — it's a support library, so you can use it with all Android platform versions back to Android 2.1 (API level 7+)...”
  
 <a name="end-points" />
+
 ## End points
  - [**Star Wars API**](https://swapi.co/): _“(...) The Star Wars API, or "swapi" (Swah-pee) is the world's first quanitified and programmatically-accessible data source for all the data from the Star Wars canon universe! We've taken all the rich contextual stuff from the universe and formatted into something easier to consume with software. Then we went and stuck an API on the front so you can access it all!...”_
  - [**Google Custom Search**](https://developers.google.com/custom-search/): _“(...) Google Custom Search enables you to create a search engine for your website, your blog, or a collection of websites. You can configure your engine to search both web pages and images. You can fine-tune the ranking, add your own promotions and customize the look and feel of the search results. You can monetize the search by connecting your engine to your Google AdSense account…”_
  <a name="tmdb" />
+ 
  - [**The Movie DB**](https://www.themoviedb.org/): _“(...) The Movie Database (TMDb) is a community built movie and TV database. Every piece of data has been added by our amazing community dating back to 2008. TMDb's strong international focus and breadth of data is largely unmatched and something we're incredibly proud of. Put simply, we live and breath community and that's precisely what makes us different…”_
 
 <a name="setup" />
+
 # Application Setup
 This application relies on three different [end points](#end-points) plus on Google Services in order to fufill the requirements. These APIs require some sort of authentication in order to allow requests. These ids are tied to develepor's account on the reffered platforms. In order to make this application work, follow the steps below:
 
@@ -232,6 +244,7 @@ java.lang.IllegalStateException: Fatal Exception thrown on Scheduler. at io.reac
 
 
 <a name="license" />
+
 ## License
 Copyright 2017 Edgar da Silva Fernandes
 
